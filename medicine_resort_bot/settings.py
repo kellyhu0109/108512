@@ -143,3 +143,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+import os
+if os.getenv('DATABASE_URL') is not None:
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config()
