@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os
+import os, django_heroku
 
 from django.core.exceptions import ImproperlyConfigured
 
@@ -141,5 +141,5 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-# LINE_CHANNEL_ACCESS_TOKEN = "BJxAW23mibhsRVOzGf97jDSguH17tEHKmrtC8Y/LteMsgKEahMEaQdDcod/kJQl/ql6BGjWvu/VONvS91kcQ6SKUaos2ZbQCBffI9MyOi9LRHJi9DAXEM9sJhLqmX0G+Nq9vh2rbH0iqbJ36pFLwywdB04t89/1O/w1cDnyilFU="
-# LINE_CHANNEL_SECRET = "8dc71d55d0ba3b4a060ea51cfcc5b939"
+# Activate Django-Heroku.
+django_heroku.settings(locals())

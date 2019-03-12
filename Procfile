@@ -1,2 +1,1 @@
-
-web: gunicorn medicine_resort_bot.wsgi --log-file -
+web: gunicorn medicine_resort_bot.wsgi
