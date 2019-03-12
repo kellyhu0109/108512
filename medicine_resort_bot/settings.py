@@ -12,6 +12,24 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
+from django.core.exceptions import ImproperlyConfigured
+
+
+def get_env_variable(var_name):
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = 'Set the {} environment variable'.format(var_name)
+        raise ImproperlyConfigured(error_msg)
+
+
+try:
+    from .settings_secret import *
+except ImportError:
+    SECRET_KEY = get_env_variable('9ee*!)y3=#7_s1&0=*!l-+q#9f#2_d*fsh$osh3md)j3__kkiq')
+    LINE_CHANNEL_ACCESS_TOKEN = get_env_variable('BJxAW23mibhsRVOzGf97jDSguH17tEHKmrtC8Y/LteMsgKEahMEaQdDcod/kJQl/ql6BGjWvu/VONvS91kcQ6SKUaos2ZbQCBffI9MyOi9LRHJi9DAXEM9sJhLqmX0G+Nq9vh2rbH0iqbJ36pFLwywdB04t89/1O/w1cDnyilFU=')
+    LINE_CHANNEL_SECRET = get_env_variable('8dc71d55d0ba3b4a060ea51cfcc5b939')
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +43,7 @@ SECRET_KEY = '9ee*!)y3=#7_s1&0=*!l-+q#9f#2_d*fsh$osh3md)j3__kkiq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['medicine-one.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -121,5 +139,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LINE_CHANNEL_ACCESS_TOKEN = "BJxAW23mibhsRVOzGf97jDSguH17tEHKmrtC8Y/LteMsgKEahMEaQdDcod/kJQl/ql6BGjWvu/VONvS91kcQ6SKUaos2ZbQCBffI9MyOi9LRHJi9DAXEM9sJhLqmX0G+Nq9vh2rbH0iqbJ36pFLwywdB04t89/1O/w1cDnyilFU="
-LINE_CHANNEL_SECRET = "8dc71d55d0ba3b4a060ea51cfcc5b939"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+# LINE_CHANNEL_ACCESS_TOKEN = "BJxAW23mibhsRVOzGf97jDSguH17tEHKmrtC8Y/LteMsgKEahMEaQdDcod/kJQl/ql6BGjWvu/VONvS91kcQ6SKUaos2ZbQCBffI9MyOi9LRHJi9DAXEM9sJhLqmX0G+Nq9vh2rbH0iqbJ36pFLwywdB04t89/1O/w1cDnyilFU="
+# LINE_CHANNEL_SECRET = "8dc71d55d0ba3b4a060ea51cfcc5b939"
