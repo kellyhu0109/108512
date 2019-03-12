@@ -1,1 +1,1 @@
-web: gunicorn medicine_resort_bot:application --log-file -
+web: gunicorn --pythonpath medicine_resort_bot medicine_resort_bot.wsgi
