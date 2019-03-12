@@ -15,20 +15,25 @@ import os, django_heroku
 from django.core.exceptions import ImproperlyConfigured
 
 
-def get_env_variable(var_name):
-    try:
-        return os.environ[var_name]
-    except KeyError:
-        error_msg = 'Set the {} environment variable'.format(var_name)
-        raise ImproperlyConfigured(error_msg)
+# def get_env_variable(var_name):
+#     try:
+#         return os.environ[var_name]
+#     except KeyError:
+#         error_msg = 'Set the {} environment variable'.format(var_name)
+#         raise ImproperlyConfigured(error_msg)
 
 
-try:
-    from .settings_secret import *
-except ImportError:
-    SECRET_KEY = get_env_variable('9ee*!)y3=#7_s1&0=*!l-+q#9f#2_d*fsh$osh3md)j3__kkiq')
-    LINE_CHANNEL_ACCESS_TOKEN = get_env_variable('m2Q7OLhF/Wk1+QL2YnKnnzGS9X+A5vKLonIYE4fieNlsrp1KxoQIscAxp90UwJONCVmWayFjUwMGjts9jDgkmW/Jcblgu6FPjBtzBpILYcoxWzezrBksvQ239bEyYbh0WOsK6YILTLlN/Ss4ETJ2HwdB04t89/1O/w1cDnyilFU=')
-    LINE_CHANNEL_SECRET = get_env_variable('5c4c2c80c935db38cbbf0eefcf58c27b')
+# try:
+#     from .settings_secret import *
+# except ImportError:
+#     SECRET_KEY = get_env_variable('9ee*!)y3=#7_s1&0=*!l-+q#9f#2_d*fsh$osh3md)j3__kkiq')
+#     LINE_CHANNEL_ACCESS_TOKEN = get_env_variable('m2Q7OLhF/Wk1+QL2YnKnnzGS9X+A5vKLonIYE4fieNlsrp1KxoQIscAxp90UwJONCVmWayFjUwMGjts9jDgkmW/Jcblgu6FPjBtzBpILYcoxWzezrBksvQ239bEyYbh0WOsK6YILTLlN/Ss4ETJ2HwdB04t89/1O/w1cDnyilFU=')
+#     LINE_CHANNEL_SECRET = get_env_variable('5c4c2c80c935db38cbbf0eefcf58c27b')
+
+
+LINE_CHANNEL_ACCESS_TOKEN = "m2Q7OLhF/Wk1+QL2YnKnnzGS9X+A5vKLonIYE4fieNlsrp1KxoQIscAxp90UwJONCVmWayFjUwMGjts9jDgkmW/Jcblgu6FPjBtzBpILYcoxWzezrBksvQ239bEyYbh0WOsK6YILTLlN/Ss4ETJ2HwdB04t89/1O/w1cDnyilFU="
+
+LINE_CHANNEL_SECRET = "5c4c2c80c935db38cbbf0eefcf58c27b"
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
