@@ -27,8 +27,8 @@ try:
     from .settings_secret import *
 except ImportError:
     SECRET_KEY = get_env_variable('9ee*!)y3=#7_s1&0=*!l-+q#9f#2_d*fsh$osh3md)j3__kkiq')
-    LINE_CHANNEL_ACCESS_TOKEN = get_env_variable('BJxAW23mibhsRVOzGf97jDSguH17tEHKmrtC8Y/LteMsgKEahMEaQdDcod/kJQl/ql6BGjWvu/VONvS91kcQ6SKUaos2ZbQCBffI9MyOi9LRHJi9DAXEM9sJhLqmX0G+Nq9vh2rbH0iqbJ36pFLwywdB04t89/1O/w1cDnyilFU=')
-    LINE_CHANNEL_SECRET = get_env_variable('8dc71d55d0ba3b4a060ea51cfcc5b939')
+    LINE_CHANNEL_ACCESS_TOKEN = get_env_variable('m2Q7OLhF/Wk1+QL2YnKnnzGS9X+A5vKLonIYE4fieNlsrp1KxoQIscAxp90UwJONCVmWayFjUwMGjts9jDgkmW/Jcblgu6FPjBtzBpILYcoxWzezrBksvQ239bEyYbh0WOsK6YILTLlN/Ss4ETJ2HwdB04t89/1O/w1cDnyilFU=')
+    LINE_CHANNEL_SECRET = get_env_variable('5c4c2c80c935db38cbbf0eefcf58c27b')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
