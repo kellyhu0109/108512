@@ -35,7 +35,7 @@ def handle_text_message(event):
     elif event.message.text == "圖片":
         line_bot_api.reply_message(
             event.reply_token,
-            ImageSendMessage(original_content_url='https://imgur.com/cStUqlu', preview_image_url='https://imgur.com/cStUqlu')
+            ImageSendMessage(original_content_url='https://i.imgur.com/cStUqlu.jpg', preview_image_url='https://i.imgur.com/cStUqlu.jpg')
         )
 
 
