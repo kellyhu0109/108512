@@ -39,7 +39,7 @@ def handle_text_message(event):
     elif event.message.text == "影片":
         line_bot_api.reply_message(
             event.reply_token,
-            VideoSendMessage(original_content_url="https://i.imgur.com/BNWVESI.mp4", preview_image_url='https://i.imgur.com/hCVf4lx.jpg')
+            VideoSendMessage(original_content_url="https://i.imgur.com/icR54sf.mp4", preview_image_url='https://i.imgur.com/hCVf4lx.jpg')
         )
     else:
         line_bot_api.reply_message(
