@@ -32,6 +32,11 @@ def handle_text_message(event):
             event.reply_token,
             StickerSendMessage(package_id=1, sticker_id=2)
         )
+    elif event.message.text == "圖片":
+        line_bot_api.reply_message(
+            event.reply_token,
+            ImageSendMessage(original_content_url='https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiwxej6xoHhAhXnGaYKHTkLDEYQjRx6BAgBEAU&url=https%3A%2F%2Fpitchfork.com%2Fnews%2Fbts-to-perform-on-snl%2F&psig=AOvVaw3U8dz7uJw38nXKq_Mhghdv&ust=1552650222763266', preview_image_url='https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwily9eCx4HhAhUkxosBHQmsDCwQjRx6BAgBEAU&url=https%3A%2F%2Fwww.bbc.co.uk%2Fnewsround%2F47445199&psig=AOvVaw3U8dz7uJw38nXKq_Mhghdv&ust=1552650222763266')
+        )
 
 
 @handler.default()
