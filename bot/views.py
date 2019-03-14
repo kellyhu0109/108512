@@ -9,7 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
-from linebot.models import MessageEvent, TextSendMessage, TextMessage
+# from linebot.models import MessageEvent, TextSendMessage, TextMessage
+from linebot.models import *
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
@@ -17,10 +18,20 @@ handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text)
-    )
+    msg = event.message.text
+    msg = msg.encode('utf-8')
+
+    if event.message.text == "文字":
+        print("收到了")
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text)
+        )
+    elif event.message.text == "貼圖":
+        line_bot_api.reply_message(
+            event.reply_token,
+            StickerSendMessage(package_id=1, sticker_id=2)
+        )
 
 
 @handler.default()
