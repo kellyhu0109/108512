@@ -2,7 +2,6 @@
 
 # WebhookHandler version
 
-
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
@@ -40,7 +39,7 @@ def handle_text_message(event):
     elif event.message.text == "影片":
         line_bot_api.reply_message(
             event.reply_token,
-            VideoSendMessage(original_content_url='./video/bb.mp4', preview_image_url='https://i.imgur.com/hCVf4lx.jpg')
+            VideoSendMessage(original_content_url="https://medicine-one.herokuapp.com/bot/callback/static/images/test.jpg", preview_image_url='https://i.imgur.com/hCVf4lx.jpg')
         )
     else:
         line_bot_api.reply_message(
