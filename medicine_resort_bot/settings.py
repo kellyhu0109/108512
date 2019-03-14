@@ -31,6 +31,8 @@ from django.core.exceptions import ImproperlyConfigured
 #     LINE_CHANNEL_SECRET = get_env_variable('5c4c2c80c935db38cbbf0eefcf58c27b')
 
 
+import dj_database_url
+
 LINE_CHANNEL_ACCESS_TOKEN = "m2Q7OLhF/Wk1+QL2YnKnnzGS9X+A5vKLonIYE4fieNlsrp1KxoQIscAxp90UwJONCVmWayFjUwMGjts9jDgkmW/Jcblgu6FPjBtzBpILYcoxWzezrBksvQ239bEyYbh0WOsK6YILTLlN/Ss4ETJ2HwdB04t89/1O/w1cDnyilFU="
 
 LINE_CHANNEL_SECRET = "5c4c2c80c935db38cbbf0eefcf58c27b"
@@ -98,13 +100,16 @@ WSGI_APPLICATION = 'medicine_resort_bot.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config()
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
