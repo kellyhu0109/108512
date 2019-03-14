@@ -19,4 +19,6 @@ from . import views
 app_name = 'medicine_resort_bot'
 urlpatterns = [
     path('callback/', views.callback),
+    path('current_datetime/', views.current_datetime),
+    path('index/', views.index),
 ]

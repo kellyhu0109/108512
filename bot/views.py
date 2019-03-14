@@ -1,10 +1,13 @@
 # line_echobot/echobot/views.py
 
 # WebhookHandler version
+import datetime
 
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect, get_object_or_404
+from django.template.loader import get_template
 
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
@@ -13,6 +16,17 @@ from linebot.models import *
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
+
+
+def current_datetime(request):
+    now = datetime.datetime.now()
+    html = "<html><body>It is now %s.</body></html>" % now
+    return HttpResponse(html)
+
+
+def index(request):
+    html = get_template('base.html')
+    return HttpResponse(html)
 
 
 @handler.add(MessageEvent, message=TextMessage)
