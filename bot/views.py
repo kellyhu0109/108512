@@ -20,11 +20,6 @@ handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
 def handle_text_message(event):
     msg = event.message.text
     msg = msg.encode('utf-8')
-    
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text)
-    )
 
     if event.message.text == "文字":
         print("收到了")
@@ -41,6 +36,11 @@ def handle_text_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             ImageSendMessage(original_content_url='https://i.imgur.com/hCVf4lx.jpg', preview_image_url='https://i.imgur.com/hCVf4lx.jpg')
+        )
+    else:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text)
         )
 
 
