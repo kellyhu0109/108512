@@ -20,5 +20,5 @@ app_name = 'medicine_resort_bot'
 urlpatterns = [
     path('callback/', views.callback),
     path('current_datetime/', views.current_datetime),
-    path('index/', views.index),
+    path('r/<int:start>/<int:end>/', views.r),
 ]

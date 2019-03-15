@@ -24,9 +24,17 @@ def current_datetime(request):
     return HttpResponse(html)
 
 
-def index(request):
-    html = get_template('base.html')
-    return HttpResponse(html)
+def r(request, start, end):
+    if start > end:
+        start, end = end, start
+
+    rr = range(start, end + 1)
+
+    rr = reversed(rr)
+
+    return render(request, 'base.html', {
+        'rr': rr,
+    })
 
 
 @handler.add(MessageEvent, message=TextMessage)

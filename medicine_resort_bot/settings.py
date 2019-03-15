@@ -87,8 +87,19 @@ WSGI_APPLICATION = 'medicine_resort_bot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',   # 數據庫引擎
+        'NAME': 'd5r823oeq16l16',  # DB名稱，ex: sakila
+        'USER': 'hpxhdxdgctipeg',     # 用戶名
+        'PASSWORD': 'b4814d673cd3fb2bcb2ce9424246c367e940c1a7ed7d59e9686bb27e7edc0bf8',  # 密碼
+        'HOST': 'ec2-54-235-134-25.compute-1.amazonaws.com',  # 本機端ip
+        'PORT': '5432',         # port
+    }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.config()
+# }
 
 # DATABASES = {
 #     'default': {
