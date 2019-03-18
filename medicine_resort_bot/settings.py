@@ -10,12 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os, django_heroku
+import os
+import django_heroku
 
-from django.core.exceptions import ImproperlyConfigured
-
-
-import dj_database_url
+# from django.core.exceptions import ImproperlyConfigured
+# import dj_database_url
 
 LINE_CHANNEL_ACCESS_TOKEN = "m2Q7OLhF/Wk1+QL2YnKnnzGS9X+A5vKLonIYE4fieNlsrp1KxoQIscAxp90UwJONCVmWayFjUwMGjts9jDgkmW/Jcblgu6FPjBtzBpILYcoxWzezrBksvQ239bEyYbh0WOsK6YILTLlN/Ss4ETJ2HwdB04t89/1O/w1cDnyilFU="
 
@@ -48,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'bootstrap4',
     'bot',
 ]
 
@@ -88,12 +88,12 @@ WSGI_APPLICATION = 'medicine_resort_bot.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',   # 數據庫引擎
-        'NAME': 'd5r823oeq16l16',  # DB名稱，ex: sakila
-        'USER': 'hpxhdxdgctipeg',     # 用戶名
-        'PASSWORD': 'b4814d673cd3fb2bcb2ce9424246c367e940c1a7ed7d59e9686bb27e7edc0bf8',  # 密碼
-        'HOST': 'ec2-54-235-134-25.compute-1.amazonaws.com',  # 本機端ip
-        'PORT': '5432',         # port
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'df5rvrct6p7uos',
+        'USER': 'qydimnhleiqifb',
+        'PASSWORD': '6b1a21354ae99a4a93f4e4ca61bd4747988a3950c518f15941750f6ba67c7c8a',
+        'HOST': 'ec2-75-101-133-29.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -146,7 +146,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
