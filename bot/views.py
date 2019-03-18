@@ -49,7 +49,7 @@ def handle_text_message(event):
     elif event.message.text == "圖片":
         line_bot_api.reply_message(
             event.reply_token,
-            ImageSendMessage(original_content_url='https://i.imgur.com/hCVf4lx.jpg', preview_image_url='https://i.imgur.com/hCVf4lx.jpg')
+            ImageSendMessage(original_content_url='./static/img/a.jpg', preview_image_url='https://i.imgur.com/hCVf4lx.jpg')
         )
     elif event.message.text == "影片":
         line_bot_api.reply_message(
