@@ -35,7 +35,7 @@ def r(request):
 def handle_text_message(event):
     msg = event.message.text
     msg = msg.encode('utf-8')
-    
+
     # get user id when reply
     user_id = event.source.user_id
     print("user_id =", user_id)
@@ -54,7 +54,7 @@ def handle_text_message(event):
     elif event.message.text == "圖片":
         line_bot_api.reply_message(
             event.reply_token,
-            ImageSendMessage(original_content_url='img/a.jpg', preview_image_url='https://i.imgur.com/hCVf4lx.jpg')
+            ImageSendMessage(original_content_url='https://i.imgur.com/hCVf4lx.jpg', preview_image_url='https://i.imgur.com/hCVf4lx.jpg')
         )
     elif event.message.text == "影片":
         line_bot_api.reply_message(
