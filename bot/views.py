@@ -30,10 +30,15 @@ def r(request):
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
 
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     msg = event.message.text
     msg = msg.encode('utf-8')
+    
+    # get user id when reply
+    user_id = event.source.user_id
+    print("user_id =", user_id)
 
     if event.message.text == "文字":
         print("收到了")
