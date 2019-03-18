@@ -78,14 +78,8 @@ def default(event):
     index_id = random.randint(0, len(sticker_ids) - 1)
     sticker_id = str(sticker_ids[index_id])
     print(index_id)
-
-    package_ids = [1, 2, 3, 4, 11537, 11538, 11539]
-    index_pids = random.randint(0, len(package_ids) - 1)
-    package_id = str(package_ids[index_pids])
-    print(index_pids)
-
     sticker_message = StickerSendMessage(
-        package_id=package_id,
+        package_id='11539',
         sticker_id=sticker_id
     )
     line_bot_api.reply_message(
