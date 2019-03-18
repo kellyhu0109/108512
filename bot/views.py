@@ -79,7 +79,7 @@ def default(event):
     sticker_id = str(sticker_ids[index_id])
     print(index_id)
     sticker_message = StickerSendMessage(
-        package_id='11539',
+        package_id='1',
         sticker_id=sticker_id
     )
     line_bot_api.reply_message(
