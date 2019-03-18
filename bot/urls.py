@@ -21,4 +21,5 @@ urlpatterns = [
     path('callback/', views.callback),
     path('current_datetime/', views.current_datetime),
     path('r/', views.r),
+    path('index/', views.index),
 ]
