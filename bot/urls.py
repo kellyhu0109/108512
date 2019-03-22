@@ -20,6 +20,6 @@ app_name = 'medicine_resort_bot'
 urlpatterns = [
     path('callback/', views.callback),
     path('current_datetime/', views.current_datetime),
-    path('r/', views.r),
+    path('r/', views.r, name='r'),
     path('index/', views.index),
 ]

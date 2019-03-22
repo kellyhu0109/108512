@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block body %}
+    <div align="center" id="container">
+        <button type="submit" class="btn btn-primary">student</button><br>
+        <button type="submit" class="btn btn-primary">course</button><br>
+        <button type="submit" class="btn btn-primary">score</button>
+        <a href="{% url 'bot:r' %}" class="btn btn-info float-right">RRR</a>
+    </div>
+{% endblock %}
