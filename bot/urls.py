@@ -18,8 +18,11 @@ from . import views
 
 app_name = 'medicine_resort_bot'
 urlpatterns = [
-    path('callback/', views.callback),
-    path('current_datetime/', views.current_datetime),
-    path('r/', views.r, name='r'),
-    path('index/', views.index),
+    path('callback/', views.callback),  # Line
+    path('current_datetime/', views.current_datetime),  # test
+    path('r/', views.r, name='r'),  # test
+
+    path('index/', views.index, name='homepage'),
+    path('tablemenu/', views.tablemenu, name='tablemenu'),
+    path('tablemenu/student/', views.student, name='students'),
 ]

@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block body %}
+    <div align="center" id="container">
+        <h1>All Students Name</h1>
+    </div><br>
+
+    <div class="list-group" style="width: 30%; margin-left: 35%; margin-bottom: 50px;">
+        {% for stu in student %}
+          <a class="list-group-item list-group-item-action" style="text-align: center;">{{ stu.stuname }}</a>
+        {% empty %}
+          <button type="button" class="list-group-item list-group-item-action" disabled>
+            Nothing in here!!!
+          </button>
+        {% endfor %}
+    </div>
+{% endblock %}

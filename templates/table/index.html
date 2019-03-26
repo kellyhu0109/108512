@@ -2,9 +2,9 @@
 {% load static %}
 {% block body %}
     <div align="center" id="container">
+        <a href="{% url 'medicine_resort_bot:students' %}" class="btn btn-info">student</a><br>
         <button type="submit" class="btn btn-primary">student</button><br>
         <button type="submit" class="btn btn-primary">course</button><br>
-        <button type="submit" class="btn btn-primary">score</button>
-        <a href="{% url 'bot:r' %}" class="btn btn-info float-right">RRR</a>
+        <button type="submit" class="btn btn-primary">score</button><br>
     </div>
 {% endblock %}

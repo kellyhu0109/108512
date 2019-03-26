@@ -7,9 +7,8 @@ import random
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render, redirect, get_object_or_404
-from django.template.loader import get_template
-
+from django.shortcuts import render
+from .models import Student
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 # from linebot.models import MessageEvent, TextSendMessage, TextMessage
@@ -25,12 +24,25 @@ def current_datetime(request):
     return HttpResponse(html)
 
 
+# test
 def r(request):
     return render(request, 'base.html')
 
 
+# homepage
 def index(request):
     return render(request, 'index.html')
+
+
+def tablemenu(request):
+    return render(request, 'table/index.html')
+
+
+def student(request):
+    students = Student.objects.all()
+    return render(request, 'table/student.html', {
+        'student': students,
+    })
 
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
