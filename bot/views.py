@@ -63,6 +63,11 @@ def handle_text_message(event):
             event.reply_token,
             TextSendMessage(text=event.message.text)
         )
+    elif event.message.text == "幹":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='十元買早餐 八元買豆干')
+        )
     elif event.message.text == "貼圖":
         line_bot_api.reply_message(
             event.reply_token,
