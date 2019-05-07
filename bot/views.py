@@ -18,23 +18,23 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlretrieve
 
-#!/usr/bin/env python
+# # !/usr/bin/env python
+#
+# import urllib
+# import json
+# import os
 
-import urllib
-import json
-import os
-
-from flask import Flask
-from flask import request
-from flask import make_response
-
-# Flask app should start in global layout
-app = Flask(__name__)
-
-
-@app.route("/", methods=['GET'])
-def hello():
-    return "Hello World!"
+# from flask import Flask
+# from flask import request
+# from flask import make_response
+#
+# # Flask app should start in global layout
+# app = Flask(__name__)
+#
+#
+# @app.route("/", methods=['GET'])
+# def hello():
+#     return "Hello World!"
 
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -94,7 +94,7 @@ def movie():
         if index == 20:
             return content
         title = data.text
-        link =  data['href']
+        link = data['href']
         content += '{}\n{}\n'.format(title, link)
     return content
 
