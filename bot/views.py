@@ -7,12 +7,35 @@ import random
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Student
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 # from linebot.models import MessageEvent, TextSendMessage, TextMessage
 from linebot.models import *
+
+import requests
+from bs4 import BeautifulSoup
+from urllib.request import urlretrieve
+
+#!/usr/bin/env python
+
+import urllib
+import json
+import os
+
+from flask import Flask
+from flask import request
+from flask import make_response
+
+# Flask app should start in global layout
+app = Flask(__name__)
+
+
+@app.route("/", methods=['GET'])
+def hello():
+    return "Hello World!"
+
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
@@ -24,12 +47,12 @@ def current_datetime(request):
     return HttpResponse(html)
 
 
-# test
+# test----------------------------------------------
 def r(request):
     return render(request, 'base.html')
 
 
-# homepage
+# homepage----------------------------------------------
 def index(request):
     return render(request, 'index.html')
 
@@ -43,6 +66,37 @@ def student(request):
     return render(request, 'table/student.html', {
         'student': students,
     })
+
+
+def studentdetail(request, pk):
+    detail = get_object_or_404(Student, stuno=pk)
+    # detail = Student.objects.all()
+    return render(request, 'table/studentdetail.html', {
+        'detail': detail,
+    })
+
+
+# def studentdetailno(request, pk):
+#     detail = get_object_or_404(Student, pk=pk)
+#     return render(request, 'table/studentdetail.html', {
+#         'detail': detail,
+#     })
+
+
+def movie():
+    target_url = 'https://movies.yahoo.com.tw/'
+    rs = requests.session()
+    res = rs.get(target_url, verify=False)
+    res.encoding = 'utf-8'
+    soup = BeautifulSoup(res.text, 'html.parser')
+    content = ""
+    for index, data in enumerate(soup.select('div.movielist_info h1 a')):
+        if index == 20:
+            return content
+        title = data.text
+        link =  data['href']
+        content += '{}\n{}\n'.format(title, link)
+    return content
 
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -66,7 +120,7 @@ def handle_text_message(event):
     elif event.message.text == "幹":
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text='泰亨仁誠秀彬是帥哥')
+            TextSendMessage(text='十元買早餐 八元買豆干')
         )
     elif event.message.text == "貼圖":
         line_bot_api.reply_message(
@@ -82,6 +136,11 @@ def handle_text_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             VideoSendMessage(original_content_url="https://i.imgur.com/icR54sf.mp4", preview_image_url='https://i.imgur.com/hCVf4lx.jpg')
+        )
+    elif event.message.text == "最新電影":
+        a = movie()
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=a)
         )
     else:
         line_bot_api.reply_message(

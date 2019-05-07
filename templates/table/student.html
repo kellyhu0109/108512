@@ -7,7 +7,7 @@
 
     <div class="list-group" style="width: 40%; margin-left: 30%; margin-bottom: 50px;">
         {% for stu in student %}
-          <a class="list-group-item list-group-item-action" style="text-align: center;">{{ stu.stuname }}</a>
+          <a href="{% url 'medicine_resort_bot:student_detail' stu.stuno %}" class="list-group-item list-group-item-action" style="text-align: center;">{{ stu.stuname }}</a>
         {% empty %}
           <button type="button" class="list-group-item list-group-item-action" disabled>
             Nothing in here!!!
