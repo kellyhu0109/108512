@@ -53,27 +53,27 @@ def r(request):
 
 
 # homepage----------------------------------------------
-def index(request):
-    return render(request, 'index.html')
-
-
-def tablemenu(request):
-    return render(request, 'table/index.html')
-
-
-def student(request):
-    students = Student.objects.all()
-    return render(request, 'table/student.html', {
-        'student': students,
-    })
-
-
-def studentdetail(request, pk):
-    detail = get_object_or_404(Student, stuno=pk)
-    # detail = Student.objects.all()
-    return render(request, 'table/studentdetail.html', {
-        'detail': detail,
-    })
+# def index(request):
+#     return render(request, 'index.html')
+#
+#
+# def tablemenu(request):
+#     return render(request, 'table/index.html')
+#
+#
+# def student(request):
+#     students = Student.objects.all()
+#     return render(request, 'table/student.html', {
+#         'student': students,
+#     })
+#
+#
+# def studentdetail(request, pk):
+#     detail = get_object_or_404(Student, stuno=pk)
+#     # detail = Student.objects.all()
+#     return render(request, 'table/studentdetail.html', {
+#         'detail': detail,
+#     })
 
 
 # def studentdetailno(request, pk):
