@@ -11,30 +11,30 @@ from django.shortcuts import render, get_object_or_404
 from .models import Student
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
-# from linebot.models import MessageEvent, TextSendMessage, TextMessage
+from linebot.models import MessageEvent, TextSendMessage, TextMessage
 from linebot.models import *
 
 import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlretrieve
 
-# # !/usr/bin/env python
-#
-# import urllib
-# import json
-# import os
+# !/usr/bin/env python
 
-# from flask import Flask
-# from flask import request
-# from flask import make_response
-#
-# # Flask app should start in global layout
-# app = Flask(__name__)
-#
-#
-# @app.route("/", methods=['GET'])
-# def hello():
-#     return "Hello World!"
+import urllib
+import json
+import os
+
+from flask import Flask
+from flask import request
+from flask import make_response
+
+# Flask app should start in global layout
+app = Flask(__name__)
+
+
+@app.route("/", methods=['GET'])
+def hello():
+    return "Hello World!"
 
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -53,34 +53,34 @@ def r(request):
 
 
 # homepage----------------------------------------------
-# def index(request):
-#     return render(request, 'index.html')
-#
-#
-# def tablemenu(request):
-#     return render(request, 'table/index.html')
-#
-#
-# def student(request):
-#     students = Student.objects.all()
-#     return render(request, 'table/student.html', {
-#         'student': students,
-#     })
-#
-#
-# def studentdetail(request, pk):
-#     detail = get_object_or_404(Student, stuno=pk)
-#     # detail = Student.objects.all()
-#     return render(request, 'table/studentdetail.html', {
-#         'detail': detail,
-#     })
+def index(request):
+    return render(request, 'index.html')
 
 
-# def studentdetailno(request, pk):
-#     detail = get_object_or_404(Student, pk=pk)
-#     return render(request, 'table/studentdetail.html', {
-#         'detail': detail,
-#     })
+def tablemenu(request):
+    return render(request, 'table/index.html')
+
+
+def student(request):
+    students = Student.objects.all()
+    return render(request, 'table/student.html', {
+        'student': students,
+    })
+
+
+def studentdetail(request, pk):
+    detail = get_object_or_404(Student, stuno=pk)
+    # detail = Student.objects.all()
+    return render(request, 'table/studentdetail.html', {
+        'detail': detail,
+    })
+
+
+def studentdetailno(request, pk):
+    detail = get_object_or_404(Student, pk=pk)
+    return render(request, 'table/studentdetail.html', {
+        'detail': detail,
+    })
 
 
 def movie():
