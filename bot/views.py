@@ -153,7 +153,29 @@ def handle_text_message(event):
             alt_text='請輸入時間',
             template=ButtonsTemplate(
                 text='請輸入時間',
-                title='yyyy-mm-dd',
+                title='幾點幾分',
+                actions=[
+                    DatetimePickerAction(
+                        label='設定',
+                        data='action=buy&itemid=1',
+                        mode='time',
+                        initial='00:00',
+                        min='00:00',
+                        max='23:59'
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(
+            event.reply_token,
+            date_picker
+        )
+    elif event.message.text == "設定日期":
+        date_picker = TemplateSendMessage(
+            alt_text='請輸入日期',
+            template=ButtonsTemplate(
+                text='請輸入日期',
+                title='輸入年/月/日',
                 actions=[
                     DatetimePickerAction(
                         label='設定',
