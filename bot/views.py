@@ -190,7 +190,11 @@ def handle_text_message(event):
         )
         line_bot_api.reply_message(
             event.reply_token,
-            date_picker
+            TextMessage(text="已經設定好囉~"),
+            StickerMessage(
+                package_id='1',
+                sticker_id='2'
+            )
         )
     else:
         line_bot_api.reply_message(
@@ -214,7 +218,8 @@ def default(event):
     )
     line_bot_api.reply_message(
         event.reply_token,
-        sticker_message)
+        sticker_message
+    )
 
 
 @csrf_exempt

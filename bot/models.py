@@ -30,3 +30,13 @@ class Student(models.Model):
     class Meta:
         managed = False
         db_table = 'student'
+
+
+class Medicinebot(models.Model):
+    userid = models.CharField(db_column='userId', primary_key=True, max_length=500)  # Field name made lowercase.
+    date = models.DateField(blank=True, null=True)
+    time = models.TimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'medicinebot'
