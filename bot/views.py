@@ -15,17 +15,17 @@ from linebot.models import *
 
 import requests
 from bs4 import BeautifulSoup
-from urllib.request import urlretrieve
+# from urllib.request import urlretrieve
 
 # !/usr/bin/env python
 
-import urllib
-import json
-import os
+# import urllib
+# import json
+# import os
 
 from flask import Flask
-from flask import request
-from flask import make_response
+# from flask import request
+# from flask import make_response
 
 # Flask app should start in global layout
 app = Flask(__name__)
