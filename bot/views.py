@@ -11,7 +11,6 @@ from django.shortcuts import render, get_object_or_404
 from .models import Student
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
-from linebot.models import MessageEvent, TextSendMessage, TextMessage
 from linebot.models import *
 
 import requests
@@ -84,6 +83,12 @@ def studentdetailno(request, pk):
 
 
 def movie():
+    r = requests.get("https://www.ptt.cc/bbs/MobileComm/index.html")  # 將網頁資料GET下來
+    soup = BeautifulSoup(r.text, "html.parser")  # 將網頁資料以html.parser
+    sel = soup.select("div.title a")  # 取HTML標中的 <div class="title"></div> 中的<a>標籤存入sel
+    for s in sel:
+        print(s["href"], s.text)
+
     target_url = 'https://movies.yahoo.com.tw/'
     rs = requests.session()
     res = rs.get(target_url, verify=False)
@@ -140,7 +145,30 @@ def handle_text_message(event):
     elif event.message.text == "最新電影":
         a = movie()
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=a)
+            event.reply_token,
+            TextSendMessage(text=a)
+        )
+    elif event.message.text == "設定時間":
+        date_picker = TemplateSendMessage(
+            alt_text='請輸入時間',
+            template=ButtonsTemplate(
+                text='請輸入時間',
+                title='yyyy-mm-dd',
+                actions=[
+                    DatetimePickerAction(
+                        label='設定',
+                        data='action=buy&itemid=1',
+                        mode='date',
+                        initial='2019-05-09',
+                        min='2019-05-09',
+                        max='2099-12-31'
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(
+            event.reply_token,
+            date_picker
         )
     else:
         line_bot_api.reply_message(
