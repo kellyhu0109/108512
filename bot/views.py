@@ -159,8 +159,8 @@ def handle_text_message(event):
                         label='設定',
                         data='action=buy&itemid=1',
                         mode='time',
-                        initial='00:00',
-                        min='00:00',
+                        initial='09:00',
+                        min='09:00',
                         max='23:59'
                     )
                 ]
