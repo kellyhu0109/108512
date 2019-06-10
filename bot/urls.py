@@ -23,7 +23,7 @@ urlpatterns = [
     path('r/', views.r, name='r'),  # test
 
     path('index/', views.index, name='homepage'),
-    path('tablemenu/', views.tablemenu, name='tablemenu'),
-    path('tablemenu/student/', views.student, name='students'),
-    path('tablemenu/student/<pk>/', views.studentdetail, name='student_detail'),
+    # path('tablemenu/', views.tablemenu, name='tablemenu'),
+    # path('tablemenu/student/', views.student, name='students'),
+    # path('tablemenu/student/<pk>/', views.studentdetail, name='student_detail'),
 ]

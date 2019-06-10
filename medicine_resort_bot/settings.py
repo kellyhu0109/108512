@@ -11,13 +11,14 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import django_heroku
+# import django_heroku
+import pymysql    # 一定要加
+pymysql.install_as_MySQLdb()   # 一定要加
 
 # from django.core.exceptions import ImproperlyConfigured
 # import dj_database_url
 
 LINE_CHANNEL_ACCESS_TOKEN = "m2Q7OLhF/Wk1+QL2YnKnnzGS9X+A5vKLonIYE4fieNlsrp1KxoQIscAxp90UwJONCVmWayFjUwMGjts9jDgkmW/Jcblgu6FPjBtzBpILYcoxWzezrBksvQ239bEyYbh0WOsK6YILTLlN/Ss4ETJ2HwdB04t89/1O/w1cDnyilFU="
-
 LINE_CHANNEL_SECRET = "5c4c2c80c935db38cbbf0eefcf58c27b"
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -33,7 +34,7 @@ SECRET_KEY = '9ee*!)y3=#7_s1&0=*!l-+q#9f#2_d*fsh$osh3md)j3__kkiq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0a5c672d.ngrok.io']
 
 # APPEND_SLASH = False
 
@@ -86,21 +87,37 @@ WSGI_APPLICATION = 'medicine_resort_bot.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'df5rvrct6p7uos',
-        'USER': 'qydimnhleiqifb',
-        'PASSWORD': '6b1a21354ae99a4a93f4e4ca61bd4747988a3950c518f15941750f6ba67c7c8a',
-        'HOST': 'ec2-75-101-133-29.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.mysql',   # 數據庫引擎
+        'NAME': 'bigdata',  # DB名稱，ex: sakila
+        'USER': 'root',     # 用戶名
+        'PASSWORD': 'bighitbts',  # 密碼
+        'HOST': '127.0.0.1',  # 本機端ip
+        'PORT': '3306',         # port
     }
 }
+
+SILENCED_SYSTEM_CHECKS = ['mysql.E001']
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'df5rvrct6p7uos',
+#         'USER': 'qydimnhleiqifb',
+#         'PASSWORD': '6b1a21354ae99a4a93f4e4ca61bd4747988a3950c518f15941750f6ba67c7c8a',
+#         'HOST': 'ec2-75
+#         +
+#         -101-133-29.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 
 # DATABASES = {
 #     'default': dj_database_url.config()
 # }
-
+#
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -152,4 +169,4 @@ STATICFILES_DIRS = [
 ]
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
