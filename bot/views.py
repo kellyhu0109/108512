@@ -8,7 +8,7 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404
-from .models import Student
+# from .models import Student
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import *
@@ -20,7 +20,7 @@ from bs4 import BeautifulSoup
 # !/usr/bin/env python
 
 # import urllib
-# import json
+import json
 # import os
 
 from flask import Flask
@@ -60,48 +60,48 @@ def tablemenu(request):
     return render(request, 'table/index.html')
 
 
-def student(request):
-    students = Student.objects.all()
-    return render(request, 'table/student.html', {
-        'student': students,
-    })
-
-
-def studentdetail(request, pk):
-    detail = get_object_or_404(Student, stuno=pk)
-    # detail = Student.objects.all()
-    return render(request, 'table/studentdetail.html', {
-        'detail': detail,
-    })
-
-
-def studentdetailno(request, pk):
-    detail = get_object_or_404(Student, pk=pk)
-    return render(request, 'table/studentdetail.html', {
-        'detail': detail,
-    })
-
-
-def movie():
-    r = requests.get("https://www.ptt.cc/bbs/MobileComm/index.html")  # 將網頁資料GET下來
-    soup = BeautifulSoup(r.text, "html.parser")  # 將網頁資料以html.parser
-    sel = soup.select("div.title a")  # 取HTML標中的 <div class="title"></div> 中的<a>標籤存入sel
-    for s in sel:
-        print(s["href"], s.text)
-
-    target_url = 'https://movies.yahoo.com.tw/'
-    rs = requests.session()
-    res = rs.get(target_url, verify=False)
-    res.encoding = 'utf-8'
-    soup = BeautifulSoup(res.text, 'html.parser')
-    content = ""
-    for index, data in enumerate(soup.select('div.movielist_info h1 a')):
-        if index == 20:
-            return content
-        title = data.text
-        link = data['href']
-        content += '{}\n{}\n'.format(title, link)
-    return content
+# def student(request):
+#     students = Student.objects.all()
+#     return render(request, 'table/student.html', {
+#         'student': students,
+#     })
+#
+#
+# def studentdetail(request, pk):
+#     detail = get_object_or_404(Student, stuno=pk)
+#     # detail = Student.objects.all()
+#     return render(request, 'table/studentdetail.html', {
+#         'detail': detail,
+#     })
+#
+#
+# def studentdetailno(request, pk):
+#     detail = get_object_or_404(Student, pk=pk)
+#     return render(request, 'table/studentdetail.html', {
+#         'detail': detail,
+#     })
+#
+#
+# def movie():
+#     r = requests.get("https://www.ptt.cc/bbs/MobileComm/index.html")  # 將網頁資料GET下來
+#     soup = BeautifulSoup(r.text, "html.parser")  # 將網頁資料以html.parser
+#     sel = soup.select("div.title a")  # 取HTML標中的 <div class="title"></div> 中的<a>標籤存入sel
+#     for s in sel:
+#         print(s["href"], s.text)
+#
+#     target_url = 'https://movies.yahoo.com.tw/'
+#     rs = requests.session()
+#     res = rs.get(target_url, verify=False)
+#     res.encoding = 'utf-8'
+#     soup = BeautifulSoup(res.text, 'html.parser')
+#     content = ""
+#     for index, data in enumerate(soup.select('div.movielist_info h1 a')):
+#         if index == 20:
+#             return content
+#         title = data.text
+#         link = data['href']
+#         content += '{}\n{}\n'.format(title, link)
+#     return content
 
 # --------------------------------------------------------------------------
 # --------------------------------------------------------------------------
@@ -112,9 +112,13 @@ def handle_text_message(event):
     msg = event.message.text
     msg = msg.encode('utf-8')
 
-    # get user id when reply
+    # # get user id when reply
     user_id = event.source.user_id
-    print("user_id =", user_id)
+    # print("user_id =", user_id)
+    #
+    # # get user text message
+    txt = event.message.text
+    # print(txt)
 
     if event.message.text == "文字":
         print("收到了")
@@ -142,12 +146,12 @@ def handle_text_message(event):
             event.reply_token,
             VideoSendMessage(original_content_url="https://i.imgur.com/icR54sf.mp4", preview_image_url='https://i.imgur.com/hCVf4lx.jpg')
         )
-    elif event.message.text == "最新電影":
-        a = movie()
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=a)
-        )
+    # elif event.message.text == "最新電影":
+    #     a = movie()
+    #     line_bot_api.reply_message(
+    #         event.reply_token,
+    #         TextSendMessage(text=a)
+    #     )
     elif event.message.text == "設定時間":
         date_picker = TemplateSendMessage(
             alt_text='請輸入時間',
@@ -164,12 +168,15 @@ def handle_text_message(event):
                         max='23:59'
                     )
                 ]
-            )
+            ),
         )
+        print(user_id)
         line_bot_api.reply_message(
             event.reply_token,
             date_picker
         )
+        # print(json.dumps(date_picker, separators=[',', ':'], sort_keys=True))
+        print(type(TemplateSendMessage))
     elif event.message.text == "設定日期":
         date_picker = TemplateSendMessage(
             alt_text='請輸入日期',
@@ -190,16 +197,12 @@ def handle_text_message(event):
         )
         line_bot_api.reply_message(
             event.reply_token,
-            TextMessage(text="已經設定好囉~"),
-            StickerMessage(
-                package_id='1',
-                sticker_id='2'
-            )
+            date_picker
         )
     else:
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=event.message.text)
+            TextSendMessage(text="不好意思我不太知道你的意思")
         )
 
 
@@ -213,8 +216,8 @@ def default(event):
     sticker_id = str(sticker_ids[index_id])
     print(index_id)
     sticker_message = StickerSendMessage(
-        package_id='1',
-        sticker_id=sticker_id
+        package_id='11537',  # 1
+        sticker_id='52002735'  # sticker_id
     )
     line_bot_api.reply_message(
         event.reply_token,
