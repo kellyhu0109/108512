@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 aa" style="margin:0px auto 0px auto;">
+                <h3>
+                    藥物提醒
+                </h3>
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 tt" style="margin:6px">
+                <label>提醒日期:</label>
+                <input class="form-control" type="date" id="date" /><br />
+
+                <label>提醒時間:</label>
+                <input class="form-control" type="time" id="time" /><br />
+
+                <label>藥名:</label>
+                <input class="form-control" type="text" id="UserInfo" /><br />
+
+                <label>備註:</label>
+                <input class="form-control" type="text" id="msg"  value="測試" style="height:150px; border:2px #bebebe solid; margin-right:10px; margin-bottom:10px;"	/><br />
+
+                <button class="btn btn-primary" id="ButtonSendMsg"  >確認</button>
+                <button class="btn btn-primary" id="ButtonGetProfile">取消</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

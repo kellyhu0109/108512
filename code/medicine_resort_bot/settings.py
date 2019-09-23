@@ -21,6 +21,9 @@ pymysql.install_as_MySQLdb()   # 一定要加
 LINE_CHANNEL_ACCESS_TOKEN = "m2Q7OLhF/Wk1+QL2YnKnnzGS9X+A5vKLonIYE4fieNlsrp1KxoQIscAxp90UwJONCVmWayFjUwMGjts9jDgkmW/Jcblgu6FPjBtzBpILYcoxWzezrBksvQ239bEyYbh0WOsK6YILTLlN/Ss4ETJ2HwdB04t89/1O/w1cDnyilFU="
 LINE_CHANNEL_SECRET = "5c4c2c80c935db38cbbf0eefcf58c27b"
 
+# LINE_CHANNEL_ACCESS_TOKEN = "NPqvqJKFwybbq3t3JJz2cjFi6alSlBBXdh2x6VNi6F/lqyxkfDkG+UfatiJS5XEYlpS6IyIx4dD7LZnolyuYZDuWNDsMY4Qwix3wioF1qMXX+faC15l1tog8DFscweGzSvmapr3RYn0uIPgf2jgb1wdB04t89/1O/w1cDnyilFU="
+# LINE_CHANNEL_SECRET = "12cffe8c0b7900686cdd055cda2584d4"
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -34,7 +37,7 @@ SECRET_KEY = '9ee*!)y3=#7_s1&0=*!l-+q#9f#2_d*fsh$osh3md)j3__kkiq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0a5c672d.ngrok.io']
+ALLOWED_HOSTS = ['c773de09.ngrok.io', '127.0.0.1', '140.131.114.151']
 
 # APPEND_SLASH = False
 
@@ -50,6 +53,7 @@ INSTALLED_APPS = [
 
     'bootstrap4',
     'bot',
+    'django_q',
 ]
 
 MIDDLEWARE = [
@@ -99,6 +103,17 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',   # 數據庫引擎
+#         'NAME': 'medicinebot',  # DB名稱，ex: sakila
+#         'USER': 'root',     # 用戶名
+#         'PASSWORD': 'bighitbts',  # 密碼
+#         'HOST': '140.131.114.151',  # 本機端ip
+#         'PORT': '3306',         # port
+#     }
+# }
+
 SILENCED_SYSTEM_CHECKS = ['mysql.E001']
 
 # DATABASES = {
@@ -143,6 +158,16 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+Q_CLUSTER = {
+    'name': 'DjangORM',
+    'workers': 1,
+    'timeout': 1800,
+    'retry': 120,
+    'queue_limit': 50,
+    'bulk': 10,
+    'orm': 'default'
+}
 
 
 # Internationalization
