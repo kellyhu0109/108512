@@ -37,7 +37,7 @@ SECRET_KEY = '9ee*!)y3=#7_s1&0=*!l-+q#9f#2_d*fsh$osh3md)j3__kkiq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['c773de09.ngrok.io', '127.0.0.1', '140.131.114.151']
+ALLOWED_HOSTS = ['132ed12d.ngrok.io', '127.0.0.1', '140.131.114.151']
 
 # APPEND_SLASH = False
 

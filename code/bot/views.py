@@ -38,6 +38,7 @@ from flask import Flask
 # Flask app should start in global layout
 app = Flask(__name__)
 
+
 @app.route("/", methods=['GET'])
 def hello():
     return "Hello World!"
@@ -295,9 +296,9 @@ def handle_text_message(event):
             event.reply_token,
             TextSendMessage(text=event.message.text)
         )
-    # elif event.message.text == "新聞":
-    #     a = news()
-    #     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
+    elif event.message.text == "更多新聞":
+        a = news()
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
     elif event.message.text == '新聞':
         message = TemplateSendMessage(
             alt_text='Buttons template',
@@ -307,8 +308,8 @@ def handle_text_message(event):
                 text='Please select',
                 actions=[
                     MessageTemplateAction(
-                        label='新聞',
-                        text='新聞'
+                        label='更多新聞',
+                        text='更多新聞'
                     ),
                     MessageTemplateAction(
                         label='康健雜誌',
@@ -368,6 +369,16 @@ def handle_text_message(event):
             event.reply_token,
             TextSendMessage(text="恭喜你設定成功!!!")
         )
+    elif event.message.text == "查詢藥品":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="請輸入藥品名稱~"+"\n\n"+"thanks")
+        )
+    elif event.message.text == "普拿疼":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="適應症為「退燒、止痛(緩解頭痛、牙痛、咽喉痛、關節痛、神經痛、肌肉酸痛、月經痛 )。」")
+        )
     elif event.message.text == '預約':
         date_picker = TemplateSendMessage(
             alt_text='請輸入預約提醒日期及時間',
@@ -390,7 +401,55 @@ def handle_text_message(event):
             event.reply_token,
             date_picker
         )
+
+    elif event.message.text == "輸入看診資訊":
+        print("Confirm template")
+        Confirm_template = TemplateSendMessage(
+            alt_text='目錄 template',
+            template=ConfirmTemplate(
+                title='OCR',
+                text='請輸入藥單OCR資訊',
+                actions=[
+                    PostbackTemplateAction(
+                        type='postback',
+                        label='Y',
+                        text='確認',
+                        data='DecideConfirm'
+                    ),
+                    MessageTemplateAction(
+                        label='N',
+                        text='取消'
+                    )
+                ]
+            )
+
+
+        )
+        line_bot_api.reply_message(event.reply_token, Confirm_template)
+
+    # content = "{}: {}".format(event.source.user_id, event.message.text)
+    #     line_bot_api.reply_message(
+    #         event.reply_token,
+    #         TextSendMessage(text=content))
+
+    elif event.message.text == '確認':
+        content = "{}: {}".format(event.source.user_id, event.reply_token)
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=content))
+
+        # line_bot_api.reply_message(
+        # event.reply_token,
+        # TextSendMessage(text="收到")
+        # )
+    elif event.message.text == '取消':
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="好吧!掰掰")
+        )
+
     elif event.message.text == ("設定時間" or "更改"):
+
         date_picker = TemplateSendMessage(
             alt_text='請輸入時間',
             template=ButtonsTemplate(
@@ -407,6 +466,7 @@ def handle_text_message(event):
                     )
                 ]
             ),
+
         )
         line_bot_api.reply_message(
             event.reply_token,
@@ -445,6 +505,12 @@ def handle_text_message(event):
             event.reply_token,
             date_picker
         )
+    elif event.message.text == "RED使用手冊":
+        print('success')
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="想設定吃藥時間嗎？可以點擊清單圖示或直接輸入「設定時間」即可唷！\n還是想看新聞呢？一樣可以點擊圖示清單來看新聞或是輸入「新聞」來選擇想查看的新聞種類唷~")
+        )
     else:
         line_bot_api.reply_message(
             event.reply_token,
@@ -476,9 +542,19 @@ def handle_post_message(event):
     if 'time' in time_type:
         print('您設定的時間是 {} {}:00'.format(datetime.date.today(), str(event.postback.params.get('time'))))
 
-        UserMessage.objects.create(
-            no=count, userid=user_id, time='{} {}:00'.format(day, str(event.postback.params.get('time')))
-        )
+        print('-'*10)
+        current_h = int(datetime.datetime.now().strftime("%H:%M")[:2])
+        set_h = int(event.postback.params.get('time')[:2])
+        current_m = int(datetime.datetime.now().strftime("%H:%M")[3:])
+        set_m = int(event.postback.params.get('time')[3:])
+
+        print("h: " + str(set_h-current_h))
+        print("m: " + str(set_m-current_m))
+        print('-'*10)
+
+        # UserMessage.objects.create(
+        #     no=count, userid=user_id, time='{} {}:00'.format(day, str(event.postback.params.get('time')))
+        # )
 
         confirm_template = TemplateSendMessage(
             alt_text='目錄 template',
