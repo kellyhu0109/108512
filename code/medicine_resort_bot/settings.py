@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 # import django_heroku
-import pymysql    # 一定要加
-pymysql.install_as_MySQLdb()   # 一定要加
+import pymysql
+pymysql.install_as_MySQLdb()
 
 # from django.core.exceptions import ImproperlyConfigured
 # import dj_database_url
@@ -37,7 +37,7 @@ SECRET_KEY = '9ee*!)y3=#7_s1&0=*!l-+q#9f#2_d*fsh$osh3md)j3__kkiq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['c773de09.ngrok.io', '127.0.0.1', '140.131.114.151']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '140.131.114.151', 'ab4047e2.ngrok.io']
 
 # APPEND_SLASH = False
 
@@ -94,52 +94,26 @@ WSGI_APPLICATION = 'medicine_resort_bot.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',   # 數據庫引擎
-        'NAME': 'bigdata',  # DB名稱，ex: sakila
-        'USER': 'root',     # 用戶名
-        'PASSWORD': 'bighitbts',  # 密碼
-        'HOST': '127.0.0.1',  # 本機端ip
-        'PORT': '3306',         # port
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mydb',
+        'USER': 'admin',
+        'PASSWORD': 'bighitbts',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',   # 數據庫引擎
-#         'NAME': 'medicinebot',  # DB名稱，ex: sakila
-#         'USER': 'root',     # 用戶名
-#         'PASSWORD': 'bighitbts',  # 密碼
-#         'HOST': '140.131.114.151',  # 本機端ip
-#         'PORT': '3306',         # port
-#     }
-# }
-
 SILENCED_SYSTEM_CHECKS = ['mysql.E001']
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'df5rvrct6p7uos',
-#         'USER': 'qydimnhleiqifb',
-#         'PASSWORD': '6b1a21354ae99a4a93f4e4ca61bd4747988a3950c518f15941750f6ba67c7c8a',
-#         'HOST': 'ec2-75
-#         +
-#         -101-133-29.compute-1.amazonaws.com',
-#         'PORT': '5432',
-#     }
-# }
-
-# DATABASES = {
-#     'default': dj_database_url.config()
-# }
-#
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
+Q_CLUSTER = { 
+	'name': 'DjangORM', 
+	'workers': 1, 
+	'timeout': 1800, 
+	'retry': 120, 
+	'queue_limit': 50, 
+	'bulk': 10, 
+	'orm': 'default' 
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -158,17 +132,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-Q_CLUSTER = {
-    'name': 'DjangORM',
-    'workers': 1,
-    'timeout': 1800,
-    'retry': 120,
-    'queue_limit': 50,
-    'bulk': 10,
-    'orm': 'default'
-}
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

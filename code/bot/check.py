@@ -3,10 +3,9 @@ import pymysql
 connection = pymysql.connect(
     host='localhost',
     port=3306,
-    user='root',
+    user='admin',
     password='bighitbts',
-    db='bigdata',
-    charset='utf8mb4'
+    db='mydb',
 )
 
 cursor = connection.cursor()
