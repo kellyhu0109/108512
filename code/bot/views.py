@@ -539,6 +539,7 @@ def handle_post_message(event):
     if 'time' in time_type:
         print('您設定的時間是 {} {}:00'.format(datetime.date.today(), str(event.postback.params.get('time'))))
 
+<<<<<<< HEAD
         #print('-'*10)
         #current_h = int(datetime.datetime.now().strftime("%H:%M")[:2])
         set_h = int(event.postback.params.get('time')[:2])
@@ -563,6 +564,21 @@ def handle_post_message(event):
             next_run=datetime.datetime.now().replace(hour=set_h, minute=set_m)
             #next_run=arrow.utcnow().replace(hour=9, minute=47)
         )
+=======
+        print('-'*10)
+        current_h = int(datetime.datetime.now().strftime("%H:%M")[:2])
+        set_h = int(event.postback.params.get('time')[:2])
+        current_m = int(datetime.datetime.now().strftime("%H:%M")[3:])
+        set_m = int(event.postback.params.get('time')[3:])
+
+        print("h: " + str(set_h-current_h))
+        print("m: " + str(set_m-current_m))
+        print('-'*10)
+
+        # UserMessage.objects.create(
+        #     no=count, userid=user_id, time='{} {}:00'.format(day, str(event.postback.params.get('time')))
+        # )
+>>>>>>> c1c934f19568c2097b8412c1f3d620ea9e6ac03a
 
         # UserMessage.objects.create(
         #     no=count, userid=user_id, time='{} {}:00'.format(day, str(event.postback.params.get('time')))
