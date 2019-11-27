@@ -190,7 +190,7 @@ def handle_text_message(event):
             event.reply_token,
             TextSendMessage(text=str(datetime.datetime.now())[11:16])
         )
-    elif event.message.text == ("設定時間" or "更改"):
+    elif event.message.text == ("設定時間"or"更改"):
         date_picker = TemplateSendMessage(
             alt_text='請輸入時間',
             template=ButtonsTemplate(
@@ -395,8 +395,10 @@ def handle_text_message(event):
         )
     else:
         line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="不好意思我不太知道你的意思")
+            event.reply_token, [
+                TextSendMessage(text="不好意思我不太知道你的意思"),
+                StickerSendMessage(package_id=11539, sticker_id=52114129)
+            ]
         )
 
 
