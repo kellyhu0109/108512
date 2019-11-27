@@ -398,7 +398,7 @@ def handle_text_message(event):
     else:
         line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text=emoji.emojize('不好意思我不太知道你的意思 :sweat_smile')),
+                TextSendMessage(text=emoji.emojize('不好意思我不太知道你的意思 \0x100009')),
                 StickerSendMessage(package_id=11539, sticker_id=52114129)
             ]
         )

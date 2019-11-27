@@ -7,8 +7,5 @@ django-bootstrap4==0.0.8
 beautifulsoup4==4.7.1
 bs4==0.0.1
 Flask==1.0.2
-<<<<<<< HEAD
-=======
 PyMySQL==0.9.3
 django_q==1.0.2
->>>>>>> c1c934f19568c2097b8412c1f3d620ea9e6ac03a
