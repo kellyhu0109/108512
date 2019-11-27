@@ -449,16 +449,6 @@ def handle_post_message(event):
             #next_run=arrow.utcnow().replace(hour=9, minute=47)
         )
 
-        print('-'*10)
-        current_h = int(datetime.datetime.now().strftime("%H:%M")[:2])
-        set_h = int(event.postback.params.get('time')[:2])
-        current_m = int(datetime.datetime.now().strftime("%H:%M")[3:])
-        set_m = int(event.postback.params.get('time')[3:])
-
-        print("h: " + str(set_h-current_h))
-        print("m: " + str(set_m-current_m))
-        print('-'*10)
-
         confirm_template = TemplateSendMessage(
             alt_text='目錄 template',
             template=ConfirmTemplate(
