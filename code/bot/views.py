@@ -185,6 +185,11 @@ def handle_text_message(event):
             event.reply_token,
             TextSendMessage(text=event.message.text)
         )
+    elif event.message.text == "現在時間":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=str(datetime.datetime.now())[11:16])
+        )
     elif event.message.text == ("設定時間" or "更改"):
         date_picker = TemplateSendMessage(
             alt_text='請輸入時間',
