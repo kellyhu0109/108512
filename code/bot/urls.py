@@ -28,4 +28,5 @@ urlpatterns = [
 
     path('doctor/', views.doctor, name='dd'),
     path('medicine/', views.medicine, name='mm'),
+    path('set_time/', views.set_time, name='ss'),
 ]

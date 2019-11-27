@@ -77,6 +77,10 @@ def medicine(request):
     return render(request, 'medicine.html')
 
 
+def set_time(request):
+    return render(request, 'set_time.html')
+
+
 def choose(request):
     return render(request, 'index.html')
 
@@ -182,7 +186,6 @@ def handle_text_message(event):
             TextSendMessage(text=event.message.text)
         )
     elif event.message.text == ("設定時間" or "更改"):
-
         date_picker = TemplateSendMessage(
             alt_text='請輸入時間',
             template=ButtonsTemplate(
@@ -205,17 +208,6 @@ def handle_text_message(event):
             event.reply_token,
             date_picker
         )
-
-        # print(json.dumps(date_picker, separators=[',', ':'], sort_keys=True))
-
-        # json_line = json.dumps(date_picker)
-        # decoded = json.loads(json_line)
-        # user_time = decoded['postback'][0]['params']['time']
-        # print(user_time)
-
-        # print(user_id)
-
-        # print(type(TemplateSendMessage))
     elif event.message.text == "更多新聞":
         a = news()
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
