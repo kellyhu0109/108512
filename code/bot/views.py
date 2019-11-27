@@ -413,16 +413,18 @@ def handle_text_message(event):
             date_picker
         )
     elif event.message.text == "RED使用手冊":
+        e = chr(0x100080)
         print('success')
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="想設定吃藥時間嘛" + emoji.emojize(':blush:') + "\n可以點擊清單圖示或直接輸入「設定時間」即可唷！\n\n還是想看新聞呢？一樣可以點擊圖示清單來看新聞或是輸入「新聞」來選擇想查看的新聞種類唷~")
+            TextSendMessage(text="想設定吃藥時間嘛" + e + "\n可以點擊清單圖示或直接輸入「設定時間」即可唷！\n\n還是想看新聞呢？一樣可以點擊圖示清單來看新聞或是輸入「新聞」來選擇想查看的新聞種類唷~")
         )
     else:
-        e = chr(0x100009)
+        e = chr(0x100010)
+        e2 = chr(0x10008D)
         line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text='不好意思我不太知道你的意思 ' + e),
+                TextSendMessage(text='不好意思 我不太清楚你的意思 ' + e + "麻煩你再說一次，或是可以點擊下方選單「RED 使用手冊」了解更多" + e2),
                 StickerSendMessage(package_id=11539, sticker_id=52114129)
             ]
         )
