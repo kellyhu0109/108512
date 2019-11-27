@@ -28,8 +28,4 @@ urlpatterns = [
 
     path('doctor/', views.doctor, name='dd'),
     path('medicine/', views.medicine, name='mm'),
-
-    # path('tablemenu/', views.tablemenu, name='tablemenu'),
-    # path('tablemenu/student/', views.student, name='students'),
-    # path('tablemenu/student/<pk>/', views.studentdetail, name='student_detail'),
 ]

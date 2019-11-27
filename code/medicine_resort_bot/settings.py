@@ -37,11 +37,7 @@ SECRET_KEY = '9ee*!)y3=#7_s1&0=*!l-+q#9f#2_d*fsh$osh3md)j3__kkiq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '140.131.114.151', 'ab4047e2.ngrok.io']
-=======
-ALLOWED_HOSTS = ['132ed12d.ngrok.io', '127.0.0.1', '140.131.114.151']
->>>>>>> c1c934f19568c2097b8412c1f3d620ea9e6ac03a
 
 # APPEND_SLASH = False
 
@@ -110,13 +106,13 @@ DATABASES = {
 SILENCED_SYSTEM_CHECKS = ['mysql.E001']
 
 Q_CLUSTER = { 
-	'name': 'DjangORM', 
-	'workers': 1, 
-	'timeout': 1800, 
-	'retry': 120, 
-	'queue_limit': 50, 
-	'bulk': 10, 
-	'orm': 'default' 
+    'name': 'DjangORM',
+    'workers': 1,
+    'timeout': 1800,
+    'retry': 120,
+    'queue_limit': 50,
+    'bulk': 10,
+    'orm': 'default'
 }
 
 # Password validation
@@ -159,6 +155,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-
-# Activate Django-Heroku.
-# django_heroku.settings(locals())

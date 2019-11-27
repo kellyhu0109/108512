@@ -4,7 +4,6 @@
 import datetime
 import os
 import random
-import apiai
 import requests
 
 from django_q.tasks import schedule
@@ -48,7 +47,6 @@ line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
 
 DIALOGFLOW_CLIENT_ACCESS_TOKEN = os.environ.get('57d08faed41c4ccf9b949d0b962ce565')
-ai = apiai.ApiAI(DIALOGFLOW_CLIENT_ACCESS_TOKEN)
 
 
 def current_datetime(request):
@@ -82,52 +80,6 @@ def medicine(request):
 def choose(request):
     return render(request, 'index.html')
 
-
-# def student(request):
-#     students = Student.objects.all()
-#     return render(request, 'table/student.html', {
-#         'student': students,
-#     })
-#
-#
-# def studentdetail(request, pk):
-#     detail = get_object_or_404(Student, stuno=pk)
-#     # detail = Student.objects.all()
-#     return render(request, 'table/studentdetail.html', {
-#         'detail': detail,
-#     })
-#
-#
-# def studentdetailno(request, pk):
-#     detail = get_object_or_404(Student, pk=pk)
-#     return render(request, 'table/studentdetail.html', {
-#         'detail': detail,
-#     })
-#
-#
-# def movie():
-#     r = requests.get("https://www.ptt.cc/bbs/MobileComm/index.html")  # 將網頁資料GET下來
-#     soup = BeautifulSoup(r.text, "html.parser")  # 將網頁資料以html.parser
-#     sel = soup.select("div.title a")  # 取HTML標中的 <div class="title"></div> 中的<a>標籤存入sel
-#     for s in sel:
-#         print(s["href"], s.text)
-#
-#     target_url = 'https://movies.yahoo.com.tw/'
-#     rs = requests.session()
-#     res = rs.get(target_url, verify=False)
-#     res.encoding = 'utf-8'
-#     soup = BeautifulSoup(res.text, 'html.parser')
-#     content = ""
-#     for index, data in enumerate(soup.select('div.movielist_info h1 a')):
-#         if index == 20:
-#             return content
-#         title = data.text
-#         link = data['href']
-#         content += '{}\n{}\n'.format(title, link)
-#     return content
-
-# --------------------------------------------------------------------------
-# --------------------------------------------------------------------------
 
 # 衛服部
 def news():
@@ -171,29 +123,6 @@ def default(event):
     )
 
 
-def get_answer(message_text):
-    # url = "https://westus.api.cognitive.microsoft.com/qnamaker/v2.0/knowledgebases/{你的QnA Service UUID}/generateAnswer"
-    # 發送request到QnAMaker Endpoint要答案
-    response = requests.post(
-        # url,
-        json.dumps({'question': message_text}),
-        headers={
-            'Content-Type': 'application/json',
-            'Ocp-Apim-Subscription-Key': '你的Key'
-        }
-    )
-    data = response.json()
-    try:
-        # 我們使用免費service可能會超過限制（一秒可以發的request數）
-        if "error" in data:
-            return data["error"]["message"]
-        # 這裡我們預設取第一個答案
-        answer = data['answers'][0]['answer']
-        return answer
-    except Exception:
-        return "Error occurs when finding answer"
-
-
 @csrf_exempt
 def callback(request):
     if request.method == 'POST':
@@ -234,19 +163,6 @@ def callback(request):
         return HttpResponseBadRequest()
 
 
-# # ================= 客製區 Start =================
-# def is_alphabet(uchar):
-#     if ('\u0041' <= uchar<='\u005a') or ('\u0061' <= uchar<='\u007a'):
-#         print('English')
-#         return "en"
-#     elif '\u4e00' <= uchar<='\u9fff':
-#         print('Chinese')
-#         return "zh-tw"
-#     else:
-#         return "en"
-# # ================= 客製區 End =================
-
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     msg = event.message.text
@@ -259,39 +175,47 @@ def handle_text_message(event):
     txt = event.message.text
     # print(txt)
 
-    ai_request = ai.text_request()
-    ai_request.session_id = user_id
-    ai_request.query = msg
-
-    # 2. 獲得使用者的意圖
-    # ai_response = json.loads(ai_request.getresponse().read())
-    # user_intent = ai_response['result']['metadata']['intentName']
-
-    # if user_intent == '圖片':
-    #     line_bot_api.reply_message(
-    #         event.reply_token,
-    #         ImageSendMessage(
-    #           original_content_url='https://i.imgur.com/hCVf4lx.jpg',
-    #           preview_image_url='https://i.imgur.com/hCVf4lx.jpg')
-    #     )
-    # else:
-    #     msg = "Sorry，I don't understand"
-    #     line_bot_api.reply_message(
-    #         event.reply_token,
-    #         TextSendMessage(text=msg)
-    #     )
-
-    # connect mysql
-
-    # for x, y in enumerate(a, 0):
-    #     print(x, a[y][2])
-
     if event.message.text == "文字":
         print("收到了")
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=event.message.text)
         )
+    elif event.message.text == ("設定時間" or "更改"):
+
+        date_picker = TemplateSendMessage(
+            alt_text='請輸入時間',
+            template=ButtonsTemplate(
+                text='請輸入時間',
+                title='幾點幾分',
+                actions=[
+                    DatetimePickerAction(
+                        label='設定',
+                        data='action=buy&itemid=1',
+                        mode='time',
+                        initial='{}'.format(str(datetime.datetime.now())[11:16]),
+                        min='00:00',
+                        max='23:59'
+                    )
+                ]
+            ),
+
+        )
+        line_bot_api.reply_message(
+            event.reply_token,
+            date_picker
+        )
+
+        # print(json.dumps(date_picker, separators=[',', ':'], sort_keys=True))
+
+        # json_line = json.dumps(date_picker)
+        # decoded = json.loads(json_line)
+        # user_time = decoded['postback'][0]['params']['time']
+        # print(user_time)
+
+        # print(user_id)
+
+        # print(type(TemplateSendMessage))
     elif event.message.text == "更多新聞":
         a = news()
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
@@ -398,7 +322,6 @@ def handle_text_message(event):
             event.reply_token,
             date_picker
         )
-
     elif event.message.text == "輸入看診資訊":
         print("Confirm template")
         Confirm_template = TemplateSendMessage(
@@ -432,8 +355,9 @@ def handle_text_message(event):
     elif event.message.text == '確認':
         content = "{}: {}".format(event.source.user_id, event.reply_token)
         line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=content))
+            event.reply_token,
+            TextSendMessage(text=content)
+        )
 
         # line_bot_api.reply_message(
         # event.reply_token,
@@ -441,45 +365,9 @@ def handle_text_message(event):
         # )
     elif event.message.text == '取消':
         line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text="好吧!掰掰")
-        )
-
-    elif event.message.text == ("設定時間" or "更改"):
-
-        date_picker = TemplateSendMessage(
-            alt_text='請輸入時間',
-            template=ButtonsTemplate(
-                text='請輸入時間',
-                title='幾點幾分',
-                actions=[
-                    DatetimePickerAction(
-                        label='設定',
-                        data='action=buy&itemid=1',
-                        mode='time',
-                        initial='{}'.format(str(datetime.datetime.now())[11:16]),
-                        min='00:00',
-                        max='23:59'
-                    )
-                ]
-            ),
-
-        )
-        line_bot_api.reply_message(
             event.reply_token,
-            date_picker
+            TextSendMessage(text="好吧!掰掰")
         )
-
-        # print(json.dumps(date_picker, separators=[',', ':'], sort_keys=True))
-
-        # json_line = json.dumps(date_picker)
-        # decoded = json.loads(json_line)
-        # user_time = decoded['postback'][0]['params']['time']
-        # print(user_time)
-
-        # print(user_id)
-
-        # print(type(TemplateSendMessage))
     elif event.message.text == "設定日期":
         date_picker = TemplateSendMessage(
             alt_text='請輸入日期',
@@ -533,25 +421,21 @@ def handle_post_message(event):
 
     # print('time' in time_type)
 
-    #count = len(UserMessage.objects.all())+1
-    #print(count)
-
     if 'time' in time_type:
         print('您設定的時間是 {} {}:00'.format(datetime.date.today(), str(event.postback.params.get('time'))))
 
-<<<<<<< HEAD
-        #print('-'*10)
-        #current_h = int(datetime.datetime.now().strftime("%H:%M")[:2])
+        # print('-'*10)
+        # current_h = int(datetime.datetime.now().strftime("%H:%M")[:2])
         set_h = int(event.postback.params.get('time')[:2])
-        #current_m = int(datetime.datetime.now().strftime("%H:%M")[3:])
+        # current_m = int(datetime.datetime.now().strftime("%H:%M")[3:])
         set_m = int(event.postback.params.get('time')[3:])
-	
-        #h = int(set_h-current_h)
-        #m = int(set_m-current_m)
 
-        #print("h: " + str(set_h-current_h))
-        #print("m: " + str(set_m-current_m))
-        #print('-'*10)
+        # h = int(set_h-current_h)
+        # m = int(set_m-current_m)
+
+        # print("h: " + str(set_h-current_h))
+        # print("m: " + str(set_m-current_m))
+        # print('-'*10)
 
         user_id = event.source.user_id
 
@@ -564,7 +448,7 @@ def handle_post_message(event):
             next_run=datetime.datetime.now().replace(hour=set_h, minute=set_m)
             #next_run=arrow.utcnow().replace(hour=9, minute=47)
         )
-=======
+
         print('-'*10)
         current_h = int(datetime.datetime.now().strftime("%H:%M")[:2])
         set_h = int(event.postback.params.get('time')[:2])
@@ -574,15 +458,6 @@ def handle_post_message(event):
         print("h: " + str(set_h-current_h))
         print("m: " + str(set_m-current_m))
         print('-'*10)
-
-        # UserMessage.objects.create(
-        #     no=count, userid=user_id, time='{} {}:00'.format(day, str(event.postback.params.get('time')))
-        # )
->>>>>>> c1c934f19568c2097b8412c1f3d620ea9e6ac03a
-
-        # UserMessage.objects.create(
-        #     no=count, userid=user_id, time='{} {}:00'.format(day, str(event.postback.params.get('time')))
-        # )
 
         confirm_template = TemplateSendMessage(
             alt_text='目錄 template',
@@ -612,10 +487,6 @@ def handle_post_message(event):
         time = str(event.postback.params.get('datetime'))[11:]
 
         print(day + ' ' + time)
-
-        #UserMessage.objects.create(
-        #    no=count, userid=user_id, time='{} {}:00'.format(day, time)
-        #)
 
         confirm_template = TemplateSendMessage(
             alt_text='目錄 template',
