@@ -198,14 +198,20 @@ def handle_text_message(event):
     txt = event.message.text
     # print(txt)
 
-    bad_words = ['幹', '廢物', '白癡', '靠', '靠邀']
+    # ---------------------------------------------------
+    msg_ids = ['這樣不行喔', '安內母湯喔', '色即是空 空即是色', '我什麼也沒看到', '（以上我省略', 'ㄎㄎ', 'ㄏㄏ']
+    index_id = random.randint(0, len(msg_ids) - 1)
+    b_msg = msg_ids[index_id]
+
+    bad_words = ['幹', '廢物', '白癡', '靠', '靠邀', '靠北']
 
     for x in bad_words:
         if x == txt:
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text="哈哈")
+                TextSendMessage(text=b_msg)
             )
+    # ---------------------------------------------------
 
     if event.message.text == "文字":
         print("收到了")
