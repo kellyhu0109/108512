@@ -112,7 +112,6 @@ def news():
 
 @handler.default()
 def default(event):
-    print(event)
     sticker_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 21, 100, 101, 102, 103, 104, 105, 106,
                    107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125,
                    126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 401, 402]
@@ -127,6 +126,23 @@ def default(event):
         event.reply_token,
         sticker_message
     )
+
+
+def msg_default(event):
+    txt = event.message.text
+
+    msg_ids = ['這樣不行喔', '安內母湯喔']
+    index_id = random.randint(0, len(msg_ids) - 1)
+    msg = msg_ids[index_id]
+
+    bad_words = ['幹', '廢物', '白癡', '靠', '靠邀']
+
+    for x in bad_words:
+        if x == txt:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=msg)
+            )
 
 
 @csrf_exempt
@@ -413,6 +429,13 @@ def handle_text_message(event):
             date_picker
         )
     elif event.message.text == "RED使用手冊":
+        e = chr(0x100080)
+        print('success')
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="想設定吃藥時間嘛" + e + "\n可以點擊清單圖示或直接輸入「設定時間」即可唷！\n\n還是想看新聞呢？一樣可以點擊圖示清單來看新聞或是輸入「新聞」來選擇想查看的新聞種類唷~")
+        )
+    elif event.message.text == "廢物":
         e = chr(0x100080)
         print('success')
         line_bot_api.reply_message(
