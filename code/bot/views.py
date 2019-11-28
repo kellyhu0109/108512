@@ -198,6 +198,15 @@ def handle_text_message(event):
     txt = event.message.text
     # print(txt)
 
+    bad_words = ['幹', '廢物', '白癡', '靠', '靠邀']
+
+    for x in bad_words:
+        if x == txt:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="哈哈")
+            )
+
     if event.message.text == "文字":
         print("收到了")
         line_bot_api.reply_message(
