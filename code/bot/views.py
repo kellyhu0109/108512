@@ -128,6 +128,7 @@ def default(event):
     )
 
 
+@handler.add(MessageEvent, message=TextMessage)
 def msg_default(event):
     txt = event.message.text
 
@@ -430,17 +431,14 @@ def handle_text_message(event):
         )
     elif event.message.text == "RED使用手冊":
         e = chr(0x100080)
-        print('success')
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="想設定吃藥時間嘛" + e + "\n可以點擊清單圖示或直接輸入「設定時間」即可唷！\n\n還是想看新聞呢？一樣可以點擊圖示清單來看新聞或是輸入「新聞」來選擇想查看的新聞種類唷~")
         )
     elif event.message.text == "廢物":
-        e = chr(0x100080)
-        print('success')
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="想設定吃藥時間嘛" + e + "\n可以點擊清單圖示或直接輸入「設定時間」即可唷！\n\n還是想看新聞呢？一樣可以點擊圖示清單來看新聞或是輸入「新聞」來選擇想查看的新聞種類唷~")
+            TextSendMessage(text="回收")
         )
     else:
         e = chr(0x100010)
