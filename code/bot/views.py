@@ -187,265 +187,270 @@ def handle_text_message(event):
 
     bad_words = ['幹', '廢物', '白癡', '靠', '靠邀', '靠北']
 
-    for x in bad_words:
-        if x == txt:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=b_msg)
-            )
+    # for x in bad_words:
+    #     if x == txt:
+    #         line_bot_api.reply_message(
+    #             event.reply_token,
+    #             TextSendMessage(text=b_msg)
+    #         )
     # ---------------------------------------------------
 
-        elif event.message.text == "文字":
-            print("收到了")
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=event.message.text)
-            )
-        elif event.message.text == "現在時間":
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=str(datetime.datetime.now())[11:16])
-            )
-        elif event.message.text == "設定時間":
-            date_picker = TemplateSendMessage(
-                alt_text='請輸入時間',
-                template=ButtonsTemplate(
-                    text='請輸入時間',
-                    title='幾點幾分',
-                    actions=[
-                        DatetimePickerAction(
-                            label='設定',
-                            data='action=buy&itemid=1',
-                            mode='time',
-                            initial='{}'.format(str(datetime.datetime.now())[11:16]),
-                            min='00:00',
-                            max='23:59'
-                        )
-                    ]
-                ),
+    if event.message.text == "文字":
+        print("收到了")
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text)
+        )
+    elif event.message.text == "現在時間":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=str(datetime.datetime.now())[11:16])
+        )
+    elif event.message.text == "設定時間":
+        date_picker = TemplateSendMessage(
+            alt_text='請輸入時間',
+            template=ButtonsTemplate(
+                text='請輸入時間',
+                title='幾點幾分',
+                actions=[
+                    DatetimePickerAction(
+                        label='設定',
+                        data='action=buy&itemid=1',
+                        mode='time',
+                        initial='{}'.format(str(datetime.datetime.now())[11:16]),
+                        min='00:00',
+                        max='23:59'
+                    )
+                ]
+            ),
 
-            )
-            line_bot_api.reply_message(
-                event.reply_token,
-                date_picker
-            )
-        elif event.message.text == "更改":
-            date_picker = TemplateSendMessage(
-                alt_text='請輸入時間',
-                template=ButtonsTemplate(
-                    text='請輸入時間',
-                    title='幾點幾分',
-                    actions=[
-                        DatetimePickerAction(
-                            label='設定',
-                            data='action=buy&itemid=1',
-                            mode='time',
-                            initial='{}'.format(str(datetime.datetime.now())[11:16]),
-                            min='00:00',
-                            max='23:59'
-                        )
-                    ]
-                ),
+        )
+        line_bot_api.reply_message(
+            event.reply_token,
+            date_picker
+        )
+    elif event.message.text == "更改":
+        date_picker = TemplateSendMessage(
+            alt_text='請輸入時間',
+            template=ButtonsTemplate(
+                text='請輸入時間',
+                title='幾點幾分',
+                actions=[
+                    DatetimePickerAction(
+                        label='設定',
+                        data='action=buy&itemid=1',
+                        mode='time',
+                        initial='{}'.format(str(datetime.datetime.now())[11:16]),
+                        min='00:00',
+                        max='23:59'
+                    )
+                ]
+            ),
 
-            )
-            line_bot_api.reply_message(
-                event.reply_token,
-                date_picker
-            )
-        elif event.message.text == "更多新聞":
-            a = news()
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
-        elif event.message.text == '新聞':
-            message = TemplateSendMessage(
-                alt_text='Buttons template',
-                template=ButtonsTemplate(
-                    thumbnail_image_url='https://attach.setn.com/newsimages/2017/02/10/805406-XXL.jpg',
-                    title='請選擇想要查看的項目~',
-                    text='Please select',
-                    actions=[
-                        MessageTemplateAction(
-                            label='更多新聞',
-                            text='更多新聞'
-                        ),
-                        MessageTemplateAction(
-                            label='康健雜誌',
-                            text='康健雜誌'
-                        ),
-                        URITemplateAction(
-                            label='看更多~~',
-                            uri='https://www.commonhealth.com.tw/'
-                        )
-                    ]
-                )
-            )
-            line_bot_api.reply_message(event.reply_token, message)
-        elif event.message.text == '康健雜誌':
-            mesg = TemplateSendMessage(
-                alt_text='ImageCarousel template',
-                template=ImageCarouselTemplate(
-                    columns=[
-                        ImageCarouselColumn(
-                            image_url='https://as.chdev.tw/web/article/4/f/4/4e6208d3-f726-4b00-9ed8-b7a40ae8d777/A0968004.jpg',
-                            action=URIAction(
-                                label='40萬人健檢才知高血壓',
-                                uri='https://www.commonhealth.com.tw/article/article.action?nid=80116',
-                                data='action=buy&itemid=1'
-                            )
-                        ),
-                        ImageCarouselColumn(
-                            image_url='https://as.chdev.tw/web/article/3/5/4/38564707-5b5e-4d20-9c6c-1aa1a54a69b51567406227.jpg',
-                            action=URIAction(
-                                label='改善腸躁症',
-                                uri='https://www.commonhealth.com.tw/article/article.action?nid=80073',
-                                data='action=buy&itemid=2'
-                            )
-                        )
-                    ]
-                )
-            )
-            line_bot_api.reply_message(event.reply_token, mesg)
-        elif event.message.text == "貼圖":
-            line_bot_api.reply_message(
-                event.reply_token,
-                StickerSendMessage(package_id=1, sticker_id=2)
-            )
-        elif event.message.text == "圖片":
-            line_bot_api.reply_message(
-                event.reply_token,
-                ImageSendMessage(original_content_url='https://i.imgur.com/UtnXde0.jpg', preview_image_url='https://i.imgur.com/UtnXde0.jpg')
-            )
-        elif event.message.text == "影片":
-            line_bot_api.reply_message(
-                event.reply_token,
-                VideoSendMessage(original_content_url="https://i.imgur.com/icR54sf.mp4", preview_image_url='https://i.imgur.com/UtnXde0.jpg')
-            )
-        elif event.message.text == "沒錯":
-            print(event.source.user_id)
-            print('success')
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="恭喜你設定成功!!!")
-            )
-        elif event.message.text == "查詢藥品":
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="請輸入藥品名稱~"+"\n\n"+"thanks")
-            )
-        elif event.message.text == "普拿疼":
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="適應症為「退燒、止痛(緩解頭痛、牙痛、咽喉痛、關節痛、神經痛、肌肉酸痛、月經痛 )。」")
-            )
-        elif event.message.text == '預約':
-            date_picker = TemplateSendMessage(
-                alt_text='請輸入預約提醒日期及時間',
-                template=ButtonsTemplate(
-                    text='請輸入預約提醒日期及時間',
-                    title='輸入年/月/日 幾時幾分',
-                    actions=[
-                        DatetimePickerAction(
-                            label='設定',
-                            data='action=buy&itemid=1',
-                            mode='datetime',
-                            initial='{}T12:00'.format(datetime.date.today()),
-                            min='{}T00:00'.format(datetime.date.today()),
-                            max='2099-12-31T23:59'
-                        )
-                    ]
-                )
-            )
-            line_bot_api.reply_message(
-                event.reply_token,
-                date_picker
-            )
-        elif event.message.text == "輸入看診資訊":
-            print("Confirm template")
-            Confirm_template = TemplateSendMessage(
-                alt_text='目錄 template',
-                template=ConfirmTemplate(
-                    title='OCR',
-                    text='請輸入藥單OCR資訊',
-                    actions=[
-                        PostbackTemplateAction(
-                            type='postback',
-                            label='Y',
-                            text='確認',
-                            data='DecideConfirm'
-                        ),
-                        MessageTemplateAction(
-                            label='N',
-                            text='取消'
-                        )
-                    ]
-                )
-
-
-            )
-            line_bot_api.reply_message(event.reply_token, Confirm_template)
-
-        # content = "{}: {}".format(event.source.user_id, event.message.text)
-        #     line_bot_api.reply_message(
-        #         event.reply_token,
-        #         TextSendMessage(text=content))
-
-        elif event.message.text == '確認':
-            content = "{}: {}".format(event.source.user_id, event.reply_token)
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=content)
-            )
-
-            # line_bot_api.reply_message(
-            # event.reply_token,
-            # TextSendMessage(text="收到")
-            # )
-        elif event.message.text == '取消':
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="好吧!掰掰")
-            )
-        elif event.message.text == "設定日期":
-            date_picker = TemplateSendMessage(
-                alt_text='請輸入日期',
-                template=ButtonsTemplate(
-                    text='請輸入日期',
-                    title='輸入年/月/日',
-                    actions=[
-                        DatetimePickerAction(
-                            label='設定',
-                            data='action=buy&itemid=1',
-                            mode='date',
-                            initial='2019-05-09',
-                            min='2019-05-09',
-                            max='2099-12-31'
-                        )
-                    ]
-                )
-            )
-            line_bot_api.reply_message(
-                event.reply_token,
-                date_picker
-            )
-        elif event.message.text == "RED使用手冊":
-            e = chr(0x100080)
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="想設定吃藥時間嘛" + e + "\n可以點擊清單圖示或直接輸入「設定時間」即可唷！\n\n還是想看新聞呢？一樣可以點擊圖示清單來看新聞或是輸入「新聞」來選擇想查看的新聞種類唷~")
-            )
-        elif event.message.text == "廢物":
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="回收")
-            )
-        else:
-            e = chr(0x100010)
-            e2 = chr(0x10008D)
-            line_bot_api.reply_message(
-                event.reply_token, [
-                    TextSendMessage(text='不好意思 我不太清楚你的意思 ' + e + "麻煩你再說一次，或是可以點擊下方選單「RED 使用手冊」了解更多" + e2),
-                    StickerSendMessage(package_id=11539, sticker_id=52114129)
+        )
+        line_bot_api.reply_message(
+            event.reply_token,
+            date_picker
+        )
+    elif event.message.text == "更多新聞":
+        a = news()
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=a))
+    elif event.message.text == '新聞':
+        message = TemplateSendMessage(
+            alt_text='Buttons template',
+            template=ButtonsTemplate(
+                thumbnail_image_url='https://attach.setn.com/newsimages/2017/02/10/805406-XXL.jpg',
+                title='請選擇想要查看的項目~',
+                text='Please select',
+                actions=[
+                    MessageTemplateAction(
+                        label='更多新聞',
+                        text='更多新聞'
+                    ),
+                    MessageTemplateAction(
+                        label='康健雜誌',
+                        text='康健雜誌'
+                    ),
+                    URITemplateAction(
+                        label='看更多~~',
+                        uri='https://www.commonhealth.com.tw/'
+                    )
                 ]
             )
+        )
+        line_bot_api.reply_message(event.reply_token, message)
+    elif event.message.text == '康健雜誌':
+        mesg = TemplateSendMessage(
+            alt_text='ImageCarousel template',
+            template=ImageCarouselTemplate(
+                columns=[
+                    ImageCarouselColumn(
+                        image_url='https://as.chdev.tw/web/article/4/f/4/4e6208d3-f726-4b00-9ed8-b7a40ae8d777/A0968004.jpg',
+                        action=URIAction(
+                            label='40萬人健檢才知高血壓',
+                            uri='https://www.commonhealth.com.tw/article/article.action?nid=80116',
+                            data='action=buy&itemid=1'
+                        )
+                    ),
+                    ImageCarouselColumn(
+                        image_url='https://as.chdev.tw/web/article/3/5/4/38564707-5b5e-4d20-9c6c-1aa1a54a69b51567406227.jpg',
+                        action=URIAction(
+                            label='改善腸躁症',
+                            uri='https://www.commonhealth.com.tw/article/article.action?nid=80073',
+                            data='action=buy&itemid=2'
+                        )
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, mesg)
+    elif event.message.text == "貼圖":
+        line_bot_api.reply_message(
+            event.reply_token,
+            StickerSendMessage(package_id=1, sticker_id=2)
+        )
+    elif event.message.text == "圖片":
+        line_bot_api.reply_message(
+            event.reply_token,
+            ImageSendMessage(original_content_url='https://i.imgur.com/UtnXde0.jpg', preview_image_url='https://i.imgur.com/UtnXde0.jpg')
+        )
+    elif event.message.text == "影片":
+        line_bot_api.reply_message(
+            event.reply_token,
+            VideoSendMessage(original_content_url="https://i.imgur.com/icR54sf.mp4", preview_image_url='https://i.imgur.com/UtnXde0.jpg')
+        )
+    elif event.message.text == "沒錯":
+        print(event.source.user_id)
+        print('success')
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="恭喜你設定成功!!!")
+        )
+    elif event.message.text == "查詢藥品":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="請輸入藥品名稱~"+"\n\n"+"thanks")
+        )
+    elif event.message.text == "普拿疼":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="適應症為「退燒、止痛(緩解頭痛、牙痛、咽喉痛、關節痛、神經痛、肌肉酸痛、月經痛 )。」")
+        )
+    elif event.message.text == '預約':
+        date_picker = TemplateSendMessage(
+            alt_text='請輸入預約提醒日期及時間',
+            template=ButtonsTemplate(
+                text='請輸入預約提醒日期及時間',
+                title='輸入年/月/日 幾時幾分',
+                actions=[
+                    DatetimePickerAction(
+                        label='設定',
+                        data='action=buy&itemid=1',
+                        mode='datetime',
+                        initial='{}T12:00'.format(datetime.date.today()),
+                        min='{}T00:00'.format(datetime.date.today()),
+                        max='2099-12-31T23:59'
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(
+            event.reply_token,
+            date_picker
+        )
+    elif event.message.text == "輸入看診資訊":
+        print("Confirm template")
+        Confirm_template = TemplateSendMessage(
+            alt_text='目錄 template',
+            template=ConfirmTemplate(
+                title='OCR',
+                text='請輸入藥單OCR資訊',
+                actions=[
+                    PostbackTemplateAction(
+                        type='postback',
+                        label='Y',
+                        text='確認',
+                        data='DecideConfirm'
+                    ),
+                    MessageTemplateAction(
+                        label='N',
+                        text='取消'
+                    )
+                ]
+            )
+
+
+        )
+        line_bot_api.reply_message(event.reply_token, Confirm_template)
+
+    # content = "{}: {}".format(event.source.user_id, event.message.text)
+    #     line_bot_api.reply_message(
+    #         event.reply_token,
+    #         TextSendMessage(text=content))
+
+    elif event.message.text == '確認':
+        content = "{}: {}".format(event.source.user_id, event.reply_token)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=content)
+        )
+
+        # line_bot_api.reply_message(
+        # event.reply_token,
+        # TextSendMessage(text="收到")
+        # )
+    elif event.message.text == '取消':
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="好吧!掰掰")
+        )
+    elif event.message.text == "設定日期":
+        date_picker = TemplateSendMessage(
+            alt_text='請輸入日期',
+            template=ButtonsTemplate(
+                text='請輸入日期',
+                title='輸入年/月/日',
+                actions=[
+                    DatetimePickerAction(
+                        label='設定',
+                        data='action=buy&itemid=1',
+                        mode='date',
+                        initial='2019-05-09',
+                        min='2019-05-09',
+                        max='2099-12-31'
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(
+            event.reply_token,
+            date_picker
+        )
+    elif event.message.text == "RED使用手冊":
+        e = chr(0x100080)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="想設定吃藥時間嘛" + e + "\n可以點擊清單圖示或直接輸入「設定時間」即可唷！\n\n還是想看新聞呢？一樣可以點擊圖示清單來看新聞或是輸入「新聞」來選擇想查看的新聞種類唷~")
+        )
+    elif event.message.text == "廢物":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="回收")
+        )
+    elif event.message.text in bad_words:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=b_msg)
+        )
+    else:
+        e = chr(0x100010)
+        e2 = chr(0x10008D)
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text='不好意思 我不太清楚你的意思 ' + e + "麻煩你再說一次，或是可以點擊下方選單「RED 使用手冊」了解更多" + e2),
+                StickerSendMessage(package_id=11539, sticker_id=52114129)
+            ]
+        )
 
 
 @handler.add(PostbackEvent)
