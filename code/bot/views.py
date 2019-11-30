@@ -494,7 +494,7 @@ def handle_post_message(event):
 
         Schedule.objects.create(
             func='bot.tasks.check_time',
-            kwargs={'user_id':user_id},
+            kwargs={'user_id': user_id, 'group_id': group_id},
             name='send_message',
             schedule_type=Schedule.MINUTES,
             repeats=1,
