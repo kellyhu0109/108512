@@ -320,8 +320,8 @@ def handle_text_message(event):
             VideoSendMessage(original_content_url="https://i.imgur.com/icR54sf.mp4", preview_image_url='https://i.imgur.com/UtnXde0.jpg')
         )
     elif event.message.text == "沒錯":
-        print(event.source.user_id)
-        print('success')
+        # print(event.source.user_id)
+        # print('success')
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="恭喜你設定成功!!!")
@@ -475,7 +475,7 @@ def handle_post_message(event):
     # print('time' in time_type)
 
     if 'time' in time_type:
-        print('您設定的時間是 {} {}:00'.format(datetime.date.today(), str(event.postback.params.get('time'))))
+        # print('您設定的時間是 {} {}:00'.format(datetime.date.today(), str(event.postback.params.get('time'))))
 
         # print('-'*10)
         # current_h = int(datetime.datetime.now().strftime("%H:%M")[:2])
