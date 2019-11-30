@@ -185,7 +185,7 @@ def handle_text_message(event):
     index_id = random.randint(0, len(msg_ids) - 1)
     b_msg = msg_ids[index_id]
 
-    bad_words = ['幹', '廢物', '白癡', '靠', '靠邀', '靠北']
+    bad_words = ['幹', '北七', '白癡', '靠', '靠邀', '靠北']
 
     # for x in bad_words:
     #     if x == txt:
@@ -458,7 +458,10 @@ def handle_post_message(event):
     print("event =", event)
 
     user_id = event.source.user_id
+    group_id = event.source.group_id
+
     print(user_id)
+    print(group_id)
     # line_bot_api.reply_message(
     #         event.reply_token, [
     #             TextMessage(text='您設定的時間是 {}'.format(str(event.postback.params.get('time'))),),
