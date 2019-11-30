@@ -185,7 +185,15 @@ def handle_text_message(event):
     index_id = random.randint(0, len(msg_ids) - 1)
     b_msg = msg_ids[index_id]
 
-    bad_words = ['幹', '北七', '白癡', '靠', '靠邀', '靠北']
+    x_words_ids = ['在非洲，每六十秒，就有一分鐘過去', '凡是每天喝水的人，有高機率在100年內死去', '每呼吸60秒，就減少一分鐘的壽命',
+                   '你只要蹲得越低越久腳就越酸', '美國人三歲就會說講英文', '成功的男人背後 都有一個脊椎', '很好笑 哈哈', '人家有的是背景，咱有的是背影',
+                   '鹹魚翻身，還是鹹魚', '託夢才是人類歷史上最早的無線通訊方式', '我像草一樣，不能自拔', '樹不要皮，必死無疑；人不要臉，天下無敵']
+    x_index_id = random.randint(0, len(x_words_ids) - 1)
+    x_words_msg = x_words_ids[x_index_id]
+
+    bad_words = ['幹', '北七', '白癡', '靠', '靠邀', '靠腰', '靠北', '幹你娘', '幹你老師', '西八']
+    all_hello = ['你好', 'hello', 'hi', '嗨', '哈囉', '안녕', '안녕하세요', 'Hi', 'Hello']
+    x_words = ['幹話', '你會講幹話嘛', '講幹話']
 
     # for x in bad_words:
     #     if x == txt:
@@ -437,10 +445,42 @@ def handle_text_message(event):
             event.reply_token,
             TextSendMessage(text="回收")
         )
+    elif event.message.text == "87":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="56")
+        )
+    elif event.message.text == "八七":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="五十六")
+        )
+    elif event.message.text == "你真的是機器人嗎":
+        e = chr(0x100096)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="我不是\n我是你的心上人" + e)
+        )
+    elif event.message.text == "你是男的還是女的":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="我是個跨性別者")
+        )
     elif event.message.text in bad_words:
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=b_msg)
+        )
+    elif event.message.text in all_hello:
+        e = chr(0x100001)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="你好~我是你的小幫手 RED" + e)
+        )
+    elif event.message.text in x_words:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=x_words_msg)
         )
     else:
         e = chr(0x100010)
