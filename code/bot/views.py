@@ -191,6 +191,8 @@ def handle_text_message(event):
     x_index_id = random.randint(0, len(x_words_ids) - 1)
     x_words_msg = x_words_ids[x_index_id]
 
+    joke = ['有一天在路上一個人的書掉了\n\n 我他說:「哈囉~你書掉囉」\n\n他回我：「我慧瑩」']
+
     bad_words = ['幹', '北七', '白癡', '靠', '靠邀', '靠腰', '靠北', '幹你娘', '幹你老師', '西八']
     all_hello = ['你好', 'hello', 'hi', '嗨', '哈囉', '안녕', '안녕하세요', 'Hi', 'Hello']
     x_words = ['幹話', '你會講幹話嘛', '講幹話']
@@ -481,6 +483,11 @@ def handle_text_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=x_words_msg)
+        )
+    elif event.message.text == "笑話":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=joke[0])
         )
     else:
         e = chr(0x100010)
