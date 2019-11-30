@@ -196,13 +196,11 @@ def handle_text_message(event):
     bad_words = ['幹', '北七', '白癡', '靠', '靠邀', '靠腰', '靠北', '幹你娘', '幹你老師', '西八']
     all_hello = ['你好', 'hello', 'hi', '嗨', '哈囉', '안녕', '안녕하세요', 'Hi', 'Hello']
     x_words = ['幹話', '你會講幹話嘛', '講幹話']
+    # ---------------------------------------------------
 
-    # for x in bad_words:
-    #     if x == txt:
-    #         line_bot_api.reply_message(
-    #             event.reply_token,
-    #             TextSendMessage(text=b_msg)
-    #         )
+    # ---------------------------------------------------
+    medicine_dict = {'普拿疼': '適應症為「退燒、止痛(緩解頭痛、牙痛、咽喉痛、關節痛、神經痛、肌肉酸痛、月經痛 )。」',
+                     '咳止糖漿': '緩解感冒之各種症狀（流鼻水，鼻塞，打噴嚏，喀痰）'}
     # ---------------------------------------------------
 
     if event.message.text == "文字":
@@ -341,10 +339,15 @@ def handle_text_message(event):
             event.reply_token,
             TextSendMessage(text="請輸入藥品名稱~"+"\n\n"+"thanks")
         )
-    elif event.message.text == "普拿疼":
+    # elif event.message.text == "普拿疼":
+    #     line_bot_api.reply_message(
+    #         event.reply_token,
+    #         TextSendMessage(text="適應症為「退燒、止痛(緩解頭痛、牙痛、咽喉痛、關節痛、神經痛、肌肉酸痛、月經痛 )。」")
+    #     )
+    elif event.message.text in medicine_dict:
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="適應症為「退燒、止痛(緩解頭痛、牙痛、咽喉痛、關節痛、神經痛、肌肉酸痛、月經痛 )。」")
+            TextSendMessage(text=medicine_dict[event.message.text])
         )
     elif event.message.text == '預約':
         date_picker = TemplateSendMessage(
