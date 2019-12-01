@@ -523,11 +523,12 @@ def handle_text_message(event):
 def handle_post_message(event):
     print("event =", event)
 
-    user_id = event.source.user_id
-    group_id = event.source.group_id
+    # user_id = event.source.user_id
+    # group_id = event.source.group_id
+    #
+    # print(user_id)
+    # print(group_id)
 
-    print(user_id)
-    print(group_id)
     # line_bot_api.reply_message(
     #         event.reply_token, [
     #             TextMessage(text='您設定的時間是 {}'.format(str(event.postback.params.get('time'))),),
@@ -562,6 +563,7 @@ def handle_post_message(event):
             group_id = ""
 
         user_id = event.source.user_id
+        # group_id = event.source.group_id
 
         Schedule.objects.create(
             func='bot.tasks.check_time',
