@@ -50,6 +50,8 @@ handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
 
 DIALOGFLOW_CLIENT_ACCESS_TOKEN = os.environ.get('57d08faed41c4ccf9b949d0b962ce565')
 
+prev = {}
+
 
 def current_datetime(request):
     now = datetime.datetime.now()
@@ -183,8 +185,6 @@ def handle_text_message(event):
     # get user text message
     txt = event.message.text
     # print(txt)
-
-    prev = {}
 
     # ---------------------------------------------------
     msg_ids = ['這樣不行喔', '安內母湯喔', '色即是空 空即是色', '我什麼也沒看到', '（以上我省略', 'ㄎㄎ', 'ㄏㄏ']
