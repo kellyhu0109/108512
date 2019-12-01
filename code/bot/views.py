@@ -184,6 +184,8 @@ def handle_text_message(event):
     txt = event.message.text
     # print(txt)
 
+    prev = {}
+
     # ---------------------------------------------------
     msg_ids = ['這樣不行喔', '安內母湯喔', '色即是空 空即是色', '我什麼也沒看到', '（以上我省略', 'ㄎㄎ', 'ㄏㄏ']
     index_id = random.randint(0, len(msg_ids) - 1)
@@ -360,6 +362,7 @@ def handle_text_message(event):
             TextSendMessage(text="請輸入藥品名稱~")
         )
     elif event.message.text == "OCR":
+        prev[event.source.user_id] = 'OCR'
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="請輸入藥單資訊")
@@ -527,12 +530,10 @@ def handle_text_message(event):
             ]
         )
 
-    prev = {}
-
     if prev[event.source.user_id] == 'OCR':
         get_ocr()
     else:
-        prev[event.source.user_id] = event.message.text
+        print('nothing')
 
     print(prev)
 
