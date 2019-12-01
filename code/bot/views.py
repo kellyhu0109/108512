@@ -529,6 +529,10 @@ def handle_text_message(event):
             ]
         )
 
+    prev = {}
+    prev[event.source.user_id] = event.message.text
+    print(prev)
+
 
 @handler.add(PostbackEvent)
 def handle_post_message(event):
