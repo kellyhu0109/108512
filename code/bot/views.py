@@ -523,6 +523,7 @@ def handle_text_message(event):
     else:
         if prev[event.source.user_id] == 'OCR':
             get_ocr()
+            prev.clear()
         else:
             e = chr(0x100010)
             e2 = chr(0x10008D)
