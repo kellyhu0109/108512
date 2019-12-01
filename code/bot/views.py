@@ -168,6 +168,12 @@ def callback(request):
         return HttpResponseBadRequest()
 
 
+def get_ocr(event):
+    prev = {}
+    prev[event.source.user_id] = event.message.text
+    print(prev)
+
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     msg = event.message.text
@@ -353,7 +359,12 @@ def handle_text_message(event):
     elif event.message.text == "查詢藥品":
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="請輸入藥品名稱~"+"\n\n"+"thanks")
+            TextSendMessage(text="請輸入藥品名稱~")
+        )
+    elif event.message.text == "OCR":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="請輸入藥單資訊")
         )
     # elif event.message.text == "普拿疼":
     #     line_bot_api.reply_message(
