@@ -168,10 +168,8 @@ def callback(request):
         return HttpResponseBadRequest()
 
 
-def get_ocr(event):
-    prev = {}
-    prev[event.source.user_id] = event.message.text
-    print(prev)
+def get_ocr():
+    print('Ok, already recieve')
 
 
 @handler.add(MessageEvent, message=TextMessage)
@@ -530,6 +528,9 @@ def handle_text_message(event):
         )
 
     prev = {}
+    if prev[event.source.user_id] == 'OCR':
+        get_ocr()
+    
     prev[event.source.user_id] = event.message.text
     print(prev)
 
