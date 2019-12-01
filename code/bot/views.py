@@ -528,10 +528,12 @@ def handle_text_message(event):
         )
 
     prev = {}
-    # if prev[event.source.user_id] == 'OCR':
-    #     get_ocr()
 
-    prev[event.source.user_id] = event.message.text
+    if prev[event.source.user_id] == 'OCR':
+        get_ocr()
+    else:
+        prev[event.source.user_id] = event.message.text
+
     print(prev)
 
 
