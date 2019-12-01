@@ -556,11 +556,12 @@ def handle_post_message(event):
         # print("m: " + str(set_m-current_m))
         # print('-'*10)
 
-        user_id = event.source.user_id
-        group_id = event.source.group_id
+        if event.source.type == 'group':
+            group_id = event.source.group_id
+        else:
+            group_id = ""
 
-        # print(event.postback.source[type] + '-'*20)
-        print(event.source.type)
+        user_id = event.source.user_id
 
         Schedule.objects.create(
             func='bot.tasks.check_time',
