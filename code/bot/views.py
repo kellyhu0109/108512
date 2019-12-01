@@ -559,6 +559,8 @@ def handle_post_message(event):
         user_id = event.source.user_id
         group_id = event.source.group_id
 
+        print(event.postback.source[type] + '-'*20)
+
         Schedule.objects.create(
             func='bot.tasks.check_time',
             kwargs={'user_id': user_id, 'group_id': group_id},
@@ -566,7 +568,6 @@ def handle_post_message(event):
             schedule_type=Schedule.MINUTES,
             repeats=1,
             next_run=datetime.datetime.now().replace(hour=set_h, minute=set_m)
-            #next_run=arrow.utcnow().replace(hour=9, minute=47)
         )
 
         confirm_template = TemplateSendMessage(
