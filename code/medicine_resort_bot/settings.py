@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-# import django_heroku
 import pymysql
 pymysql.install_as_MySQLdb()
 
@@ -95,7 +94,7 @@ WSGI_APPLICATION = 'medicine_resort_bot.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydb',
+        'NAME': 'medicine',
         'USER': 'admin',
         'PASSWORD': 'bighitbts',
         'HOST': 'localhost',
