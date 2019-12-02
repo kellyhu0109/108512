@@ -510,6 +510,11 @@ def handle_text_message(event):
             event.reply_token,
             TextSendMessage(text="你好~我是你的小幫手 RED" + e)
         )
+    elif event.message.text == "RED":
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="嗨~有什麼需要幫忙的嘛")
+        )
     elif event.message.text in x_words:
         line_bot_api.reply_message(
             event.reply_token,
