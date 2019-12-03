@@ -22,10 +22,11 @@ from linebot.models import *
 import pymysql
 
 from bs4 import BeautifulSoup
+from .models import OcrTable
 # from urllib.request import urlretrieve
 
 from django.db import connection
-from .forms import OcrModelForm
+# from .forms import OcrModelForm
 
 # !/usr/bin/env python
 
@@ -83,14 +84,21 @@ def medicine(request):
 
 
 def set_time(request):
-    form = OcrModelForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('bot:choose')
-
+    ocr_detail = OcrTable.objects.all()
     return render(request, 'set_time.html', {
-        'form': form,
+        'ocr_detail': ocr_detail,
     })
+
+
+# def set_time(request):
+#     form = OcrModelForm(request.POST or None)
+#     if form.is_valid():
+#         form.save()
+#         return redirect('bot:choose')
+#
+#     return render(request, 'set_time.html', {
+#         'form': form,
+#     })
 
 
 def choose(request):
