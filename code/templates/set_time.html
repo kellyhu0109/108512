@@ -1,67 +1,85 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block body %}
+    <!--<title>修改用藥資訊</title>-->
+
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-md-6 aa" style="margin:0px auto 0px auto;">-->
+                <!--<h3 style="margin-bottom:35px; margin-top: 15px">-->
+					<!--修改用藥資訊-->
+				<!--</h3>-->
+            <!--</div>-->
+            <!--<div class="col-md-6"></div>-->
+        <!--</div>-->
+
+		<!--<form role="form">-->
+			<!--<div class="form-group">-->
+
+				<!--<H3>-->
+					<!--診所名稱-->
+				<!--</H3>-->
+				<!--<input type="text" class="form-control" id="hospName" style="margin-bottom:35px">-->
+
+				<!--<H3>-->
+					<!--看診日期-->
+				<!--</H3>-->
+				<!--<input type="date" class="form-control" id="date" style="margin-bottom:35px">-->
+
+				<!--<H3>-->
+					<!--姓名-->
+				<!--</H3>-->
+				<!--<input type="text" class="form-control" id="name" style="margin-bottom:35px">-->
+
+				<!--<table border="1" style="margin-bottom:35px">-->
+				<!--　<tr>-->
+					<!--<td>藥品</td>-->
+					<!--<td>次量</td>-->
+					<!--<td>次</td>-->
+					<!--<td>天</td>-->
+				<!--　</tr>-->
+				<!--<tr>-->
+					<!--<td><input type="text" id="medName"></td>-->
+					<!--<td><input type="text" id="doseage"></td>-->
+					<!--<td><input type="text" id="time"></td>-->
+					<!--<td><input type="text" id="day"></td>-->
+				<!--　</tr><br>-->
+				<!--</table>-->
+
+			<!--</div>-->
+
+			<!--<H3>吃藥提醒時間</H3><br>-->
+				<!--<input type="radio" name="location" value="Taipei">感冒藥(3天)-->
+				<!--<input type="radio" name="location" value="Taoyuan" style="margin-left:50px">長期服用(ex:慢性病)<br><br>-->
+
+			<!--<div>-->
+			<!--<input type="checkbox">	<label>早</label> <input type="time" value="07:00"><br>-->
+			<!--<input type="checkbox">	<label>午</label> <input type="time" value="12:00"><br>-->
+			<!--<input type="checkbox">	<label>晚</label> <input type="time" value="19:00"><br><br>-->
+			<!--</div>-->
+
+			<!--<button type="submit" class="btn btn-primary" style="margin-bottom: 30px;">-->
+				<!--確認-->
+			<!--</button>-->
+
+		<!--</form>-->
+    <!--</div>-->
+
     <title>修改用藥資訊</title>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 aa" style="margin:0px auto 0px auto;">
-                <h3 style="margin-bottom:35px; margin-top: 15px">
-					修改用藥資訊
-				</h3>
-            </div>
-            <div class="col-md-6"></div>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h1>修改用藥資訊</h1>
+            <hr>
+            <form action="" method="post" class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+              <button type="submit" class="btn btn-primary">
+                Submit
+              </button>
+            {% endbuttons %}
+            </form>
         </div>
-
-		<form role="form">
-			<div class="form-group">
-
-				<H3>
-					診所名稱
-				</H3>
-				<input type="text" class="form-control" id="hospName" style="margin-bottom:35px">
-
-				<H3>
-					看診日期
-				</H3>
-				<input type="date" class="form-control" id="date" style="margin-bottom:35px">
-
-				<H3>
-					姓名
-				</H3>
-				<input type="text" class="form-control" id="name" style="margin-bottom:35px">
-
-				<table border="1" style="margin-bottom:35px">
-				　<tr>
-					<td>藥品</td>
-					<td>次量</td>
-					<td>次</td>
-					<td>天</td>
-				　</tr>
-				<tr>
-					<td><input type="text" id="medName"></td>
-					<td><input type="text" id="doseage"></td>
-					<td><input type="text" id="time"></td>
-					<td><input type="text" id="day"></td>
-				　</tr><br>
-				</table>
-
-			</div>
-
-			<H3>吃藥提醒時間</H3><br>
-				<input type="radio" name="location" value="Taipei">感冒藥(3天)
-				<input type="radio" name="location" value="Taoyuan" style="margin-left:50px">長期服用(ex:慢性病)<br><br>
-
-			<div>
-			<input type="checkbox">	<label>早</label> <input type="time" value="07:00"><br>
-			<input type="checkbox">	<label>午</label> <input type="time" value="12:00"><br>
-			<input type="checkbox">	<label>晚</label> <input type="time" value="19:00"><br><br>
-			</div>
-
-			<button type="submit" class="btn btn-primary" style="margin-bottom: 30px;">
-				確認
-			</button>
-
-		</form>
     </div>
 {% endblock %}

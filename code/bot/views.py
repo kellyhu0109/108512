@@ -15,7 +15,7 @@ import emoji
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import *
@@ -25,6 +25,7 @@ from bs4 import BeautifulSoup
 # from urllib.request import urlretrieve
 
 from django.db import connection
+from .forms import OcrModelForm
 
 # !/usr/bin/env python
 
@@ -82,7 +83,14 @@ def medicine(request):
 
 
 def set_time(request):
-    return render(request, 'set_time.html')
+    form = OcrModelForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('bot:choose')
+
+    return render(request, 'set_time.html', {
+        'form': form,
+    })
 
 
 def choose(request):
