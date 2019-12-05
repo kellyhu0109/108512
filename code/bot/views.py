@@ -623,14 +623,14 @@ def handle_text_message(event):
             TextSendMessage(text="好的~請輸入您的藥單資訊~")
         )
     else:
-        if prev[event.source.user_id] == 'OCR':
+        if event.source.user_id not in prev:
             get_ocr(event)
             prev.update({event.source.user_id: ''})
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text='好的~請輸入您的OCR掃描~')
             )
-        elif event.source.user_id not in prev:
+        elif prev[event.source.user_id] == 'OCR':
             e = chr(0x100010)
             e2 = chr(0x10008D)
             prev.update({event.source.user_id: ''})
