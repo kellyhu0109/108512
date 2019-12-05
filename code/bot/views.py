@@ -117,7 +117,7 @@ def get_ocr(event):
     with open('/home/bbkook/108512/code/templates/ocr/message.txt', "r", encoding='utf8') as s:
         msg = s.readlines()
 
-    jieba.load_userdict('medicine.txt')
+    jieba.load_userdict('/home/bbkook/108512/code/templates/ocr/medicine.txt')
 
     content = [x.strip() for x in content]
     medicine = [x.strip() for x in medicine]
