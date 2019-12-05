@@ -166,7 +166,7 @@ def get_ocr(event):
     for i in seg_list:
         if i in medicine:
             med_msg += i + "\n"
-            print(i)
+            # print(i)
 
     print('='*20)
     print(med_msg)
@@ -174,7 +174,9 @@ def get_ocr(event):
 
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage("姓名:" + ocr_name + "\n看診日期:" + ocr_date + "\n院所名稱:" + ocr_h_name + "\n藥品名稱:\n" + med_msg)
+        TextSendMessage(
+            text="姓名: " + ocr_name + "\n看診日期:" + ocr_date + "\n院所名稱:" + ocr_h_name + "\\n藥品名稱:\n" + med_msg
+        )
     )
 
     # print("Default Mode: " + "/ ".join(seg_list))
@@ -628,7 +630,7 @@ def handle_text_message(event):
                 event.reply_token,
                 TextSendMessage(text='好的~請輸入您的OCR掃描~')
             )
-        elif prev == {}:
+        elif event.source.user_id not in prev:
             e = chr(0x100010)
             e2 = chr(0x10008D)
             prev.update({event.source.user_id: ''})
