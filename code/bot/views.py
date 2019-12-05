@@ -510,13 +510,14 @@ def handle_text_message(event):
 
 
         )
-        line_bot_api.reply_message(event.reply_token, Confirm_template)
-
+        line_bot_api.reply_message(
+            event.reply_token,
+            Confirm_template
+        )
     # content = "{}: {}".format(event.source.user_id, event.message.text)
     #     line_bot_api.reply_message(
     #         event.reply_token,
     #         TextSendMessage(text=content))
-
     elif event.message.text == '確認':
         content = "{}: {}".format(event.source.user_id, event.reply_token)
         line_bot_api.reply_message(
@@ -630,6 +631,7 @@ def handle_text_message(event):
         else:
             e = chr(0x100010)
             e2 = chr(0x10008D)
+            prev.update({event.source.user_id: ''})
             line_bot_api.reply_message(
                 event.reply_token, [
                     TextSendMessage(text='不好意思 我不太清楚你的意思 ' + e + "麻煩你再說一次，或是可以點擊下方選單「RED 使用手冊」了解更多" + e2),
@@ -642,7 +644,7 @@ def handle_text_message(event):
     # else:
     #     print('nothing')
 
-    print(prev)
+    # print(prev)
 
 
 @handler.add(PostbackEvent)
