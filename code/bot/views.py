@@ -374,12 +374,12 @@ def handle_text_message(event):
             event.reply_token,
             TextSendMessage(text="請輸入藥品名稱~")
         )
-    elif event.message.text == "OCR":
-        prev[event.source.user_id] = 'OCR'
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="請輸入藥單資訊")
-        )
+    # elif event.message.text == "OCR":
+    #     prev[event.source.user_id] = 'OCR'
+    #     line_bot_api.reply_message(
+    #         event.reply_token,
+    #         TextSendMessage(text="請輸入藥單資訊")
+    #     )
     # elif event.message.text == "普拿疼":
     #     line_bot_api.reply_message(
     #         event.reply_token,
@@ -542,9 +542,8 @@ def handle_text_message(event):
         prev[event.source.user_id] = "OCR"
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text='好的~請輸入您的OCR掃描~'
+            TextSendMessage(text="好的~請輸入您的藥單資訊~")
         )
-    )
     else:
         if prev[event.source.user_id] == 'OCR':
             get_ocr(event)
