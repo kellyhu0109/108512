@@ -274,8 +274,6 @@ def handle_text_message(event):
     txt = event.message.text
     # print(txt)
 
-    prev[user_id] = msg
-
     # ---------------------------------------------------
     msg_ids = ['這樣不行喔', '安內母湯喔', '色即是空 空即是色', '我什麼也沒看到', '（以上我省略', 'ㄎㄎ', 'ㄏㄏ']
     index_id = random.randint(0, len(msg_ids) - 1)
@@ -629,6 +627,16 @@ def handle_text_message(event):
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text='好的~請輸入您的OCR掃描~')
+            )
+        elif prev == {}:
+            e = chr(0x100010)
+            e2 = chr(0x10008D)
+            prev.update({event.source.user_id: ''})
+            line_bot_api.reply_message(
+                event.reply_token, [
+                    TextSendMessage(text='不好意思 我不太清楚你的意思 ' + e + "麻煩你再說一次，或是可以點擊下方選單「RED 使用手冊」了解更多" + e2),
+                    StickerSendMessage(package_id=11539, sticker_id=52114129)
+                ]
             )
         else:
             e = chr(0x100010)
