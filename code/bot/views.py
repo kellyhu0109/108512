@@ -639,12 +639,12 @@ def handle_text_message(event):
                 ]
             )
 
+    print(prev)
+
     # if prev[event.source.user_id] == 'OCR':
     #     get_ocr()
     # else:
     #     print('nothing')
-
-    # print(prev)
 
 
 @handler.add(PostbackEvent)
