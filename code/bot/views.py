@@ -108,7 +108,7 @@ def choose(request):
 
 
 def get_ocr(event):
-    with open('../templates/ocr/symbol.txt', "r", encoding='utf8') as f:
+    with open('ocr/symbol.txt', "r", encoding='utf8') as f:
         content = f.readlines()
 
     with open('medicine.txt', "r", encoding='utf8') as m:
