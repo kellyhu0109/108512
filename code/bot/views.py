@@ -379,7 +379,7 @@ def handle_text_message(event):
         message = TemplateSendMessage(
             alt_text='Buttons template',
             template=ButtonsTemplate(
-                thumbnail_image_url='https://attach.setn.com/newsimages/2017/02/10/805406-XXL.jpg',
+                thumbnail_image_url='https://www.garygoh.com.au/images/news/News%20image.jpg',
                 title='請選擇想要查看的項目~',
                 text='Please select',
                 actions=[
@@ -624,13 +624,6 @@ def handle_text_message(event):
         )
     else:
         if event.source.user_id not in prev:
-            get_ocr(event)
-            prev.update({event.source.user_id: ''})
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text='好的~請輸入您的OCR掃描~')
-            )
-        elif prev[event.source.user_id] == 'OCR':
             e = chr(0x100010)
             e2 = chr(0x10008D)
             prev.update({event.source.user_id: ''})
@@ -639,6 +632,13 @@ def handle_text_message(event):
                     TextSendMessage(text='不好意思 我不太清楚你的意思 ' + e + "麻煩你再說一次，或是可以點擊下方選單「RED 使用手冊」了解更多" + e2),
                     StickerSendMessage(package_id=11539, sticker_id=52114129)
                 ]
+            )
+        elif prev[event.source.user_id] == 'OCR':
+            get_ocr(event)
+            prev.update({event.source.user_id: ''})
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text='好的~請輸入您的OCR掃描~')
             )
         else:
             e = chr(0x100010)
