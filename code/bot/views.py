@@ -23,6 +23,7 @@ import pymysql
 
 from bs4 import BeautifulSoup
 from .models import OcrTable
+from .ocr import get_ocr
 # from urllib.request import urlretrieve
 
 from django.db import connection
@@ -184,10 +185,6 @@ def callback(request):
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
-
-
-def get_ocr():
-    print('Ok, already recieve')
 
 
 @handler.add(MessageEvent, message=TextMessage)
@@ -541,10 +538,21 @@ def handle_text_message(event):
             event.reply_token,
             TextSendMessage(text=joke[0])
         )
+    elif event.message.text == "OCR":
+        prev[event.source.user_id] = "OCR"
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='好的~請輸入您的OCR掃描~'
+        )
+    )
     else:
         if prev[event.source.user_id] == 'OCR':
-            get_ocr()
+            get_ocr(event)
             prev.update({event.source.user_id: ''})
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text='好的~請輸入您的OCR掃描~')
+            )
         else:
             e = chr(0x100010)
             e2 = chr(0x10008D)
