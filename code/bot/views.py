@@ -111,10 +111,10 @@ def get_ocr(event):
     with open('/home/bbkook/108512/code/templates/ocr/symbol.txt', "r", encoding='utf8') as f:
         content = f.readlines()
 
-    with open('medicine.txt', "r", encoding='utf8') as m:
+    with open('/home/bbkook/108512/code/templates/ocr/medicine.txt', "r", encoding='utf8') as m:
         medicine = m.readlines()
 
-    with open('ocr/message.txt', "r", encoding='utf8') as s:
+    with open('/home/bbkook/108512/code/templates/ocr/message.txt', "r", encoding='utf8') as s:
         msg = s.readlines()
 
     jieba.load_userdict('medicine.txt')
