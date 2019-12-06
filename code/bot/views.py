@@ -175,7 +175,7 @@ def get_ocr(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(
-            text="姓名: " + ocr_name + "\n看診日期:" + ocr_date + "\n院所名稱:" + ocr_h_name + "\\n藥品名稱:\n" + med_msg
+            text="姓名: " + ocr_name + "\n看診日期:" + ocr_date + "\n院所名稱:" + ocr_h_name + "\n藥品名稱:\n" + med_msg
         )
     )
 
