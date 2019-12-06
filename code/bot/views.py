@@ -562,7 +562,7 @@ def handle_text_message(event):
         e = chr(0x100080)
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="RED使用手冊：\n\n✔設定提醒時間\n    ▶準時吃藥、回診不錯過\n\n✔藥物使用須知\n   ▶輸入藥名/OCR照相輸入藥名，深入瞭解藥物資訊\n\n✔最新新聞   ▶\n獲取藥物界、疾病界資訊，最新新聞不錯過\n\n✔群組功能\n   ▶將本帳號加入家人或朋友群組，互相提醒，增進彼此感情\n\n\n🔺可使用選單輸入或打字自行輸入，啟動以上功能")
+            TextSendMessage(text="RED使用手冊：\n\n✔設定提醒時間\n    ▶準時吃藥、回診不錯過\n\n✔藥物使用須知\n   ▶輸入藥名/OCR照相輸入藥名，深入瞭解藥物資訊\n\n✔最新新聞\n▶獲取藥物界、疾病界資訊，最新新聞不錯過\n\n✔群組功能\n   ▶將本帳號加入家人或朋友群組，互相提醒，增進彼此感情\n\n\n🔺可使用選單輸入或打字自行輸入，啟動以上功能")
         )
     elif event.message.text == "廢物":
         line_bot_api.reply_message(
